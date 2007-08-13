@@ -13,3 +13,10 @@ Rake::TestTask.new("test:caching") do |t|
   t.pattern = 'test/caching/**/*_test.rb'
   t.verbose = true
 end
+
+desc "Run the tests for disconnecting"
+Rake::TestTask.new("test:disconnecting") do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/disconnecting/**/*_test.rb'
+  t.verbose = true
+end

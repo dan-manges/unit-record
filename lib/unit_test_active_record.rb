@@ -1,1 +1,4 @@
 require "unit_test_active_record/column_dumper"
+require "unit_test_active_record/disconnect_active_record"
+ActiveRecord::Base.extend UnitTestActiveRecord::DisconnectActiveRecord
+
