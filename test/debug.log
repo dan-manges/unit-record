@@ -1,0 +1,18 @@
+# Logfile created on Mon Aug 13 18:54:26 -0400 2007 by logger.rb/1.5.2.9
+  [4;36;1mSQL (0.000571)[0m   [0;1mCREATE TABLE people ("id" INTEGER PRIMARY KEY NOT NULL, "first_name" varchar(255) DEFAULT NULL, "last_name" varchar(255) DEFAULT NULL) [0m
+  [4;35;1mSQL (0.000182)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000099)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000090)[0m   [0mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000585)[0m   [0;1mCREATE TABLE people ("id" INTEGER PRIMARY KEY NOT NULL, "first_name" varchar(255) DEFAULT NULL, "last_name" varchar(255) DEFAULT NULL) [0m
+  [4;35;1mSQL (0.000182)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000095)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000086)[0m   [0mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000568)[0m   [0;1mCREATE TABLE people ("id" INTEGER PRIMARY KEY NOT NULL, "first_name" varchar(255) DEFAULT NULL, "last_name" varchar(255) DEFAULT NULL) [0m
+  [4;35;1mSQL (0.000182)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000092)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000085)[0m   [0mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000573)[0m   [0;1mCREATE TABLE people ("id" INTEGER PRIMARY KEY NOT NULL, "first_name" varchar(255) DEFAULT NULL, "last_name" varchar(255) DEFAULT NULL) [0m
+  [4;35;1mSQL (0.000181)[0m   [0mCREATE TABLE schema_info (version integer)[0m
+  [4;36;1mSQL (0.000093)[0m   [0;1mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;35;1mSQL (0.000086)[0m   [0mUPDATE schema_info SET version = 0[0m
+  [4;36;1mSQL (0.000328)[0m   [0;1mSELECT name FROM sqlite_master WHERE type = 'table'[0m
