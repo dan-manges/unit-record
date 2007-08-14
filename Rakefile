@@ -1,5 +1,6 @@
 require 'rake'
 require 'rake/testtask'
+require 'rake/rdoctask'
 
 desc "Default: run tests"
 task :default => :test
@@ -19,4 +20,12 @@ Rake::TestTask.new("test:disconnecting") do |t|
   t.libs << 'lib'
   t.pattern = 'test/disconnecting/**/*_test.rb'
   t.verbose = true
+end
+
+desc "Generate documentation"
+Rake::RDocTask.new(:doc) do |rdoc|
+  rdoc.rdoc_dir = "doc"
+  rdoc.title    = "Unit Test ActiveRecord"
+  rdoc.options << '--line-numbers'
+  rdoc.rdoc_files.include('README')
 end
