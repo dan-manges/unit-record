@@ -2,9 +2,11 @@
 
 This plugin provides unit testing for ActiveRecord by disconnecting tests from the database.
 
-== Why?
+== The Benefits
 
-Because using the database through ActiveRecord when testing domain models means tests are not focused enough.  Rails has its own test suite.  Your application unit tests should focus on testing your business logic in the class under test, not testing ActiveRecord.  Also, disconnecting from the database helps make the tests run much faster:
+Rationale: http://www.dcmanges.com/blog/rails-unit-record-test-without-the-database
+
+One huge benefit to disconnecting unit tests from the database is having a faster test suite.  Here is the benchmark from my current ThoughtWorks project:
 
   Finished in 11.541093 seconds.
   3001 tests, 5325 assertions, 0 failures, 0 errors
