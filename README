@@ -27,7 +27,7 @@ Or with piston:
 
 === Restructuring the Rails Test Directory
 
-The Rails test directory typically places testing for models under <tt>test/unit</tt> and tests for controllers under <tt>test/functional</tt>.  However, we need to change the definition of unit and functional.  Controllers can be unit tested (tested with mocking out models and without rendering the view).  Also, models can be functionally tested (hitting the database).  Also, each type of test needs its own test_helper.  You should restructure your test directory like this:
+The Rails test directory typically places testing for models under <tt>test/unit</tt> and tests for controllers under <tt>test/functional</tt>.  However, we need to change the definition of unit and functional.  Controllers can be unit tested (mocking out models and not rendering the view).  Models can be functionally tested (hitting the database).  Also, each type of test needs its own test_helper.  You should restructure your test directory like this:
   test
     test_helper.rb
     unit
