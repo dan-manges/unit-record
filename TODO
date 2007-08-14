@@ -1,0 +1,4 @@
+* Allow custom table names
+* More graceful handling if cannot find corresponding class for table.
+* Figure out Fixtures (take require out of unit_test_active_record.rb?)
+* test "" do syntax
