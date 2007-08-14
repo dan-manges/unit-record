@@ -17,5 +17,7 @@ silence_stream(STDOUT) do
   load(File.dirname(__FILE__) + "/schema.rb") if File.exist?(File.dirname(__FILE__) + "/schema.rb")
 end
 
+Test::Unit::TestCase.use_transactional_fixtures = true
+
 class Person < ActiveRecord::Base
 end
