@@ -1,4 +1,4 @@
-= Unit Test ActiveRecord
+= UnitRecord
 
 This plugin provides unit testing for ActiveRecord by disconnecting tests from the database.
 

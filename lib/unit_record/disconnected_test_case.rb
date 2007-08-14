@@ -1,4 +1,4 @@
-module UnitTestActiveRecord
+module UnitRecord
   module DisconnectedTestCase
     def disconnect!
       self.use_transactional_fixtures = false

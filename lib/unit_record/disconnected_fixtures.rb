@@ -1,4 +1,4 @@
-module UnitTestActiveRecord
+module UnitRecord
   module DisconnectedFixtures
     def disconnect!
       (class << self; self; end).class_eval do

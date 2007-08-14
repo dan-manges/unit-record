@@ -1,5 +1,5 @@
 require 'erb'
-module UnitTestActiveRecord
+module UnitRecord
   class ColumnDumper
     private_class_method :new
     

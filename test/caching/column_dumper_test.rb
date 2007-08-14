@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + "/../test_helper"
 class ColumnDumperTest < Test::Unit::TestCase
   def test_column_dumper
     stream = StringIO.new
-    UnitTestActiveRecord::ColumnDumper.dump(ActiveRecord::Base.connection, stream)
+    UnitRecord::ColumnDumper.dump(ActiveRecord::Base.connection, stream)
     expected = <<-END
 Person.class_eval do
   def self.columns

@@ -1,1 +1,1 @@
-require "unit_test_active_record"
+require "unit_record"

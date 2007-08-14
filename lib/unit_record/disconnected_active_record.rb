@@ -1,4 +1,4 @@
-module UnitTestActiveRecord
+module UnitRecord
   module DisconnectedActiveRecord
     def disconnect!
       columns_file = File.join(RAILS_ROOT, "db", "columns.rb")
