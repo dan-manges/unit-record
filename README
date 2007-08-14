@@ -16,10 +16,10 @@ Because using the database through ActiveRecord when testing domain models means
 == Installation
 
 The traditional way:
-  ruby script/plugin install http://unit-test-ar.rubyforge.org/svn/trunk/unit_test_active_record/
+  ruby script/plugin install http://unit-test-ar.rubyforge.org/svn/trunk/unit_record/
 
 Or with piston:
-  piston import http://unit-test-ar.rubyforge.org/svn/trunk/unit_test_active_record/ vendor/plugins/unit_test_active_record
+  piston import http://unit-test-ar.rubyforge.org/svn/trunk/unit_record/ vendor/plugins/unit_record
 
 == Usage
 
