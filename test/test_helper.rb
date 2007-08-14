@@ -7,6 +7,11 @@ require 'active_record'
 require 'active_record/fixtures'
 require 'active_support/binding_of_caller'
 require 'active_support/breakpoint'
+begin
+  require 'mocha'
+rescue LoadError
+  raise "Need Mocha to Test"
+end
 
 ActiveRecord::Base.configurations['test'] = YAML::load(IO.read(File.dirname(__FILE__) + '/database.yml'))
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
