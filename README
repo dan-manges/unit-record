@@ -17,11 +17,7 @@ One huge benefit to disconnecting unit tests from the database is having a faste
 
 == Installation
 
-The traditional way:
-  ruby script/plugin install http://unit-test-ar.rubyforge.org/svn/trunk/unit_record/
-
-Or with piston:
-  piston import http://unit-test-ar.rubyforge.org/svn/trunk/unit_record/ vendor/plugins/unit_record
+    gem install unit_record
 
 == Usage
 
@@ -46,24 +42,23 @@ The <tt>functional_test_helper.rb</tt> file should require <tt>test_helper.rb</t
 
 For moving unit tests, you have a few options.  I recommend moving them to unit/models and then disconnecting your unit tests from the database.  Any tests that fail should then be modified to not hit the database or moved to functional/models.
 
-== Caching Columns
-
-The plugin disconnects models from the database by caching the column metadata.  This is done through a rake task:
-  rake db:columns:dump
-
-The rake task creates a db/columns.rb file which will be used in the tests.  If you have a custom build/test rake task, you may just want to insert this task before you run your unit tests.  Otherwise, you can automatically have it run before <tt>test:units</tt> as so:
-  Rake::Task["test:units"].enhance ["db:columns:dump"]
-
 == Disconnecting
 
 In the <tt>test/unit/unit_test_helper.rb</tt> file you created when restructuring your test directory, you should add these lines:
   require File.dirname(__FILE__) + "/../test_helper"
+  require "unit_record"
   ActiveRecord::Base.disconnect!
   
-The <tt>disconnect!</tt> method will do everything necessary (including loading the columns.rb file) to run your unit tests without hitting the database.
+The <tt>disconnect!</tt> method will do everything necessary to run your unit tests without hitting the database.  For now, it connects to the database and caches the columns in a file (db/columns.rb) before disconnecting.  A later version will not need to connect at all.
+
+== Limitations
+
+* UnitRecord currently only works when all models use convention for table names.
 
 == Thanks
 Thanks to Jay Fields for the original implementation:
 http://blog.jayfields.com/2007/03/rails-activerecord-unit-testing-part-ii.html
 
-Copyright (c) 2007 Dan Manges, released under the MIT license.
+== License
+Released under Ruby's license.
+http://www.ruby-lang.org/en/LICENSE.txt
