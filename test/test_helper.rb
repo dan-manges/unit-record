@@ -9,8 +9,9 @@ require 'active_support/binding_of_caller'
 require 'active_support/breakpoint'
 begin
   require 'mocha'
+  require 'dust'
 rescue LoadError
-  raise "Need Mocha to Test"
+  raise "Need Mocha and Dust gems to Test"
 end
 
 ActiveRecord::Base.configurations['test'] = YAML::load(IO.read(File.dirname(__FILE__) + '/database.yml'))

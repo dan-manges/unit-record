@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../test_helper"
 
 class ColumnDumperTest < Test::Unit::TestCase
-  def test_column_dumper
+  test "dumping columns" do
     stream = StringIO.new
     UnitRecord::ColumnDumper.dump(ActiveRecord::Base.connection, stream)
     expected = <<-END
