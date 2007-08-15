@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + "/disconnecting_test_helper"
+require File.dirname(__FILE__) + "/./disconnecting_test_helper"
+# The '.' is intentional to have a TestCase require a different relative path.
 
 class DisconnectedActiveRecordTest < Test::Unit::TestCase
   def test_accessing_connection_raises
