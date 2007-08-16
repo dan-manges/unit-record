@@ -20,10 +20,12 @@ ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'
 
 require "#{File.dirname(__FILE__)}/../init"
 silence_stream(STDOUT) do
-  load(File.dirname(__FILE__) + "/schema.rb") if File.exist?(File.dirname(__FILE__) + "/schema.rb")
+  load(File.dirname(__FILE__) + "/db/schema.rb") if File.exist?(File.dirname(__FILE__) + "/db/schema.rb")
 end
 
 Test::Unit::TestCase.use_transactional_fixtures = true
 
+class Preferences < ActiveRecord::Base
+end
 class Person < ActiveRecord::Base
 end
