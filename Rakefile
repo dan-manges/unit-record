@@ -40,7 +40,7 @@ Gem::manage_gems
 specification = Gem::Specification.new do |s|
 	s.name   = "unit_record"
   s.summary = "UnitRecord enables unit testing without hitting the database."
-	s.version = "0.1.0"
+	s.version = "0.2.0"
 	s.author = "Dan Manges"
 	s.description = "UnitRecord enables unit testing without hitting the database."
 	s.email = "daniel.manges@gmail.com"
