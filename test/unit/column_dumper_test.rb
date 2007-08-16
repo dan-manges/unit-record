@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../test_helper"
 
-class ColumnDumperTest < Test::Unit::TestCase
+unit_tests do
   test "dumping columns" do
     stream = StringIO.new
     UnitRecord::ColumnDumper.dump(ActiveRecord::Base.connection, stream)
@@ -15,6 +15,6 @@ Person.class_eval do
   end
 end
 END
-    assert_equal expected, stream.string
+    assert stream.string.include?(expected)
   end
 end

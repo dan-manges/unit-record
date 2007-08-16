@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/../test_helper"
 
-class ColumnExtensionTest < Test::Unit::TestCase
+unit_tests do
   test "equality" do
     column1 = ActiveRecord::ConnectionAdapters::Column.new("name", nil, :string, nil)
     column2 = ActiveRecord::ConnectionAdapters::Column.new("name", nil, :string, nil)

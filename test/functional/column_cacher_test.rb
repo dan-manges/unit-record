@@ -1,8 +1,7 @@
-require File.dirname(__FILE__) + "/../test_helper"
+require File.dirname(__FILE__) + "/functional_test_helper"
 
-class ColumnCacherTest < Test::Unit::TestCase
+functional_tests do
   test "caching columns with no defaults or not nulls" do
-    UnitRecord::ColumnCacher.cache(RAILS_ROOT + "/db/schema.rb")
     assert_equal [
       ActiveRecord::ConnectionAdapters::Column.new("id", nil, :primary_key, nil),
       ActiveRecord::ConnectionAdapters::Column.new("first_name", nil, :string, nil),
@@ -11,6 +10,6 @@ class ColumnCacherTest < Test::Unit::TestCase
   end
   
   test "caching column with default" do
-    
+    assert_equal [ActiveRecord::ConnectionAdapters::Column.new("show_help", false, :boolean, nil)], Preference.columns[1..-1]
   end
 end

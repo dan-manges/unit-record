@@ -13,6 +13,7 @@ begin
 rescue LoadError
   raise "Need Mocha and Dust gems to Test"
 end
+Test::Unit::TestCase.disallow_setup!
 
 ActiveRecord::Base.configurations['test'] = YAML::load(IO.read(File.dirname(__FILE__) + '/database.yml'))
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
@@ -25,7 +26,7 @@ end
 
 Test::Unit::TestCase.use_transactional_fixtures = true
 
-class Preferences < ActiveRecord::Base
+class Preference < ActiveRecord::Base
 end
 class Person < ActiveRecord::Base
 end

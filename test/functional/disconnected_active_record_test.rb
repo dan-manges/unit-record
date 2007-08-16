@@ -1,7 +1,7 @@
-require File.dirname(__FILE__) + "/./disconnecting_test_helper"
+require File.dirname(__FILE__) + "/./functional_test_helper"
 # The '.' is intentional to have a TestCase require a different relative path.
 
-class DisconnectedActiveRecordTest < Test::Unit::TestCase
+functional_tests do
   test "accessing connection raises" do
     assert_raises(RuntimeError) { ActiveRecord::Base.connection }
   end
