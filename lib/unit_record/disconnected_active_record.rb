@@ -18,6 +18,8 @@ module UnitRecord
       end
       Fixtures.disconnect!
       Test::Unit::TestCase.disconnect!
+      old_columns_file = File.join(RAILS_ROOT, 'db', 'columns.rb')
+      File.delete old_columns_file if File.exists?(old_columns_file)
       ColumnCacher.cache(RAILS_ROOT + "/db/schema.rb")
     end
   end
