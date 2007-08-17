@@ -12,4 +12,8 @@ functional_tests do
   test "caching column with default" do
     assert_equal ActiveRecord::ConnectionAdapters::Column.new("show_help", true, "tinyint(1)", nil), Preference.columns.detect { |c| c.name == "show_help" }
   end
+  
+  test "add_index does not blow up" do
+    assert_nothing_raised { UnitRecord::ColumnCacher.new.add_index("people", "first_name") }
+  end
 end

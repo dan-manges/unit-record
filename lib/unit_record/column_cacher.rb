@@ -11,6 +11,9 @@ module UnitRecord
       load file
     end
 
+    def add_index(table_name, column_name, options = {})
+    end
+
     def create_table(table_name, options={})
       table_definition = ActiveRecord::ConnectionAdapters::TableDefinition.new(self)
       table_definition.primary_key(options[:primary_key] || "id") unless options[:id] == false

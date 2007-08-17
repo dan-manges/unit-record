@@ -8,4 +8,6 @@ ActiveRecord::Schema.define(:version => 0) do
     t.column :first_name, :string
     t.column :last_name,  :string
   end
+  
+  add_index "people", ["first_name"]
 end
