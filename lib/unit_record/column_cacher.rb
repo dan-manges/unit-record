@@ -26,11 +26,26 @@ module UnitRecord
       end
     end
     
+    def native_database_types
+      # Copied from the MysqlAdapter so ColumnDefinition#sql_type will work
+      {
+        :primary_key => "int(11) DEFAULT NULL auto_increment PRIMARY KEY",
+        :string      => { :name => "varchar", :limit => 255 },
+        :text        => { :name => "text" },
+        :integer     => { :name => "int", :limit => 11 },
+        :float       => { :name => "float" },
+        :decimal     => { :name => "decimal" },
+        :datetime    => { :name => "datetime" },
+        :timestamp   => { :name => "datetime" },
+        :time        => { :name => "time" },
+        :date        => { :name => "date" },
+        :binary      => { :name => "blob" },
+        :boolean     => { :name => "tinyint", :limit => 1 }
+      }
+    end
+
     def model_for_table(table)
       table.to_s.classify.constantize rescue nil
-    end
-    
-    def method_missing(method, *args, &block)
     end
   end
 end

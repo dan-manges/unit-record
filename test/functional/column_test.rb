@@ -8,6 +8,16 @@ functional_tests do
   end
   
   test "using model with column with a default" do
-    
+    record = Preference.new
+    assert_equal true, record.show_help?
+  end
+  
+  test "typecasting happens for integer attributes" do
+    record = Preference.new
+    record.some_count = "42"
+    assert_equal 42, record.some_count
+  end
+  
+  test "" do
   end
 end
