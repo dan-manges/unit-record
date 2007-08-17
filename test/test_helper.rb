@@ -15,14 +15,7 @@ rescue LoadError
 end
 Test::Unit::TestCase.disallow_setup!
 
-ActiveRecord::Base.configurations['test'] = YAML::load(IO.read(File.dirname(__FILE__) + '/database.yml'))
-ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
-ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations['test'][ENV['DB'] || 'sqlite3'])
-
 require "#{File.dirname(__FILE__)}/../init"
-silence_stream(STDOUT) do
-  load(File.dirname(__FILE__) + "/db/schema.rb") if File.exist?(File.dirname(__FILE__) + "/db/schema.rb")
-end
 
 Test::Unit::TestCase.use_transactional_fixtures = true
 
