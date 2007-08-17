@@ -1,11 +1,12 @@
 require "unit_record/column_cacher"
-require "unit_record/column_dumper"
 require "unit_record/column_extension"
-ActiveRecord::ConnectionAdapters::Column.send :include, UnitRecord::ColumnExtension
 require "unit_record/disconnected_active_record"
 require "unit_record/disconnected_test_case"
 require "unit_record/disconnected_fixtures"
+
+require "active_record/fixtures"
+
+ActiveRecord::ConnectionAdapters::Column.send :include, UnitRecord::ColumnExtension
 ActiveRecord::Base.extend UnitRecord::DisconnectedActiveRecord
 Test::Unit::TestCase.extend UnitRecord::DisconnectedTestCase
-require "active_record/fixtures"
 Fixtures.extend UnitRecord::DisconnectedFixtures
