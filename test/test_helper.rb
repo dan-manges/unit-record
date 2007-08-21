@@ -23,3 +23,6 @@ class Preference < ActiveRecord::Base
 end
 class Person < ActiveRecord::Base
 end
+class Foo < ActiveRecord::Base
+  set_table_name :foofoo
+end

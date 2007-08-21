@@ -6,6 +6,12 @@ module UnitRecord
     def disconnect!
       return if disconnected?
       (class << self; self; end).class_eval do
+        def cached_columns
+          @@_cached_columns ||= {}
+        end
+        def columns
+          cached_columns[table_name]
+        end
         def connection
           raise "ActiveRecord is disconnected; database access is unavailable in unit tests."
         end
@@ -18,8 +24,6 @@ module UnitRecord
       end
       Fixtures.disconnect!
       Test::Unit::TestCase.disconnect!
-      old_columns_file = File.join(RAILS_ROOT, 'db', 'columns.rb')
-      File.delete old_columns_file if File.exists?(old_columns_file)
       ColumnCacher.cache(RAILS_ROOT + "/db/schema.rb")
     end
   end

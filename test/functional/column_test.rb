@@ -18,6 +18,13 @@ functional_tests do
     assert_equal 42, record.some_count
   end
   
-  test "" do
+  test "a model with a non-convential table name does not blow up" do
+    assert_nothing_raised { Foo.columns }
+  end
+  
+  test "using attribute on a model with a non-conventional table name" do
+    foo = Foo.new
+    foo.bar = "baz"
+    assert_equal "baz", foo.bar
   end
 end
