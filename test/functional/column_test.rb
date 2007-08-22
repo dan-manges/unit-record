@@ -27,4 +27,14 @@ functional_tests do
     foo.bar = "baz"
     assert_equal "baz", foo.bar
   end
+  
+  test "should get a descriptive error message if no cached columns" do
+    exception = nil
+    begin
+      DoesNotExist.columns
+    rescue => exception
+    end
+    assert_not_nil exception
+    assert_equal "Columns are not cached for 'table_does_not_exist' - check schema.rb", exception.message
+  end
 end

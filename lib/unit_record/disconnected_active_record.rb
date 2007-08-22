@@ -10,7 +10,8 @@ module UnitRecord
           @@_cached_columns ||= {}
         end
         def columns
-          cached_columns[table_name]
+          cached_columns[table_name] ||
+           raise("Columns are not cached for '#{table_name}' - check schema.rb")
         end
         def connection
           raise "ActiveRecord is disconnected; database access is unavailable in unit tests."

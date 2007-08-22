@@ -26,3 +26,6 @@ end
 class Foo < ActiveRecord::Base
   set_table_name :foofoo
 end
+class DoesNotExist < ActiveRecord::Base
+  set_table_name "table_does_not_exist"
+end

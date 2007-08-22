@@ -1,0 +1,12 @@
+*0.3.0* (August 22nd, 2007)
+
+* Works with models using non-conventional table names.
+
+*0.2.0* (August 16th, 2007)
+
+* Cache columns based on schema.rb
+
+*0.1.0* (August 15th, 2007)
+
+* Converted plugin into a gem.
+* No longer depend on Rake task to dump and cache columns.
