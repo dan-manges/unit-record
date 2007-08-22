@@ -51,10 +51,6 @@ In the <tt>test/unit/unit_test_helper.rb</tt> file you created when restructurin
   
 The <tt>disconnect!</tt> method will do everything necessary to run your unit tests without hitting the database.  For now, it connects to the database and caches the columns in a file (db/columns.rb) before disconnecting.  A later version will not need to connect at all.
 
-== Limitations
-
-* UnitRecord currently only works when all models use convention for table names.
-
 == Thanks
 Thanks to Jay Fields for the original implementation:
 http://blog.jayfields.com/2007/03/rails-activerecord-unit-testing-part-ii.html
