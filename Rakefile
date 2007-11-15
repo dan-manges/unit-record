@@ -61,15 +61,15 @@ Rake::GemPackageTask.new(specification) do |package|
 end
 
 RUBY_VERSIONS = %w[1.8.5-p52 1.8.5-p114 1.8.6]
-ACTIVE_RECORD_VERSIONS = %w[1.15.5 1.99.0]
+RAILS_VERSIONS = %w[1.2.5 1.99.0]
 
 namespace :test do
-  desc "test with multiple versions of ruby"
+  desc "test with multiple versions of ruby and rails"
   task :multi do
     RUBY_VERSIONS.each do |ruby_version|
       bin = "/usr/local/ruby-#{ruby_version}/bin"
-      ACTIVE_RECORD_VERSIONS.each do |ar_version|
-        sh "activerecord='#{ar_version}' #{bin}/rake test > /dev/null 2>&1"
+      RAILS_VERSIONS.each do |rails_version|
+        sh "RAILS_VERSION='#{rails_version}' #{bin}/rake test > /dev/null 2>&1"
       end
     end      
   end
