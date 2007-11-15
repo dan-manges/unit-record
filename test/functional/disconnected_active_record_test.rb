@@ -1,9 +1,18 @@
-require File.dirname(__FILE__) + "/./functional_test_helper"
-# The '.' is intentional to have a TestCase require a different relative path.
+require File.dirname(__FILE__) + "/functional_test_helper"
 
 functional_tests do
   test "accessing connection raises" do
     assert_raises(RuntimeError) { ActiveRecord::Base.connection }
+  end
+  
+  test "accessing connection gives exception message with class name" do
+    exception = nil
+    begin
+      Person.connection
+    rescue => exception
+    end
+    assert_not_nil exception
+    assert_equal "(from Person): ActiveRecord is disconnected; database access is unavailable in unit tests.", exception.message
   end
   
   test "connected? is false" do

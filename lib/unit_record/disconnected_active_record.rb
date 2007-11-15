@@ -14,7 +14,7 @@ module UnitRecord
            raise("Columns are not cached for '#{table_name}' - check schema.rb")
         end
         def connection
-          raise "ActiveRecord is disconnected; database access is unavailable in unit tests."
+          raise "(from #{to_s}): ActiveRecord is disconnected; database access is unavailable in unit tests."
         end
         def connected?
           false

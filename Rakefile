@@ -59,3 +59,19 @@ Rake::GemPackageTask.new(specification) do |package|
   package.need_zip = false
   package.need_tar = false
 end
+
+#  1.8.5-p114
+RUBY_VERSIONS = %w[1.8.5-p52 1.8.6]
+ACTIVE_RECORD_VERSIONS = %w[1.15.5 1.99.0]
+
+namespace :test do
+  desc "test with multiple versions of ruby"
+  task :multi do
+    RUBY_VERSIONS.each do |ruby_version|
+      bin = "/usr/local/ruby-#{ruby_version}/bin"
+      ACTIVE_RECORD_VERSIONS.each do |ar_version|
+        sh "activerecord='#{ar_version}' #{bin}/rake test > /dev/null 2>&1"
+      end
+    end      
+  end
+end

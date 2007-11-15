@@ -3,10 +3,17 @@ RAILS_ROOT = File.dirname(__FILE__)
 
 require 'rubygems'
 require 'test/unit'
+
+if version = ENV['activerecord']
+  gem "activerecord", version
+end
 require 'active_record'
 require 'active_record/fixtures'
-require 'active_support/binding_of_caller'
-require 'active_support/breakpoint'
+require 'active_record/version'
+if ENV['activerecord'] && ActiveRecord::VERSION::STRING != ENV['activerecord']
+  raise "wrong activerecord version. expected #{ENV['activerecord']} got #{ActiveRecord::VERSION::STRING}"
+end
+
 begin
   require 'mocha'
   require 'dust'
