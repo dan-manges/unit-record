@@ -22,6 +22,10 @@ require "#{File.dirname(__FILE__)}/../init"
 
 Test::Unit::TestCase.use_transactional_fixtures = true
 
+# Needed because of this line in setup_with_fixtures and teardown_with_fixtures:
+#   return unless defined?(ActiveRecord::Base) && !ActiveRecord::Base.configurations.blank?
+ActiveRecord::Base.configurations = {"irrelevant" => {:adapter => "stub"}}
+
 class Preference < ActiveRecord::Base
 end
 class Person < ActiveRecord::Base

@@ -22,6 +22,9 @@ module UnitRecord
         def disconnected?
           true
         end
+        def table_exists?
+          true
+        end
       end
       Fixtures.disconnect!
       Test::Unit::TestCase.disconnect!

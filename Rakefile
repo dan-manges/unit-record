@@ -61,7 +61,8 @@ Rake::GemPackageTask.new(specification) do |package|
 end
 
 RUBY_VERSIONS = %w[1.8.5-p52 1.8.5-p114 1.8.6]
-RAILS_VERSIONS = %w[1.2.5 1.99.0]
+JRUBY_VERSIONS = %w[1.1b1 1.0.2]
+RAILS_VERSIONS = %w[1.2.5 1.99.0 2.0.1]
 
 namespace :test do
   desc "test with multiple versions of ruby and rails"
@@ -70,6 +71,16 @@ namespace :test do
       bin = "/usr/local/ruby-#{ruby_version}/bin"
       RAILS_VERSIONS.each do |rails_version|
         sh "RAILS_VERSION='#{rails_version}' #{bin}/rake test > /dev/null 2>&1"
+      end
+    end      
+  end
+  
+  desc "test with multiple versions of jruby and rails"
+  task :multi_jruby do
+    JRUBY_VERSIONS.each do |jruby_version|
+      home = "/usr/local/jruby/jruby-#{jruby_version}"
+      RAILS_VERSIONS.each do |rails_version|
+        sh "JRUBY_HOME=#{home} RAILS_VERSION='#{rails_version}' #{home}/bin/rake test > /dev/null 2>&1"
       end
     end      
   end

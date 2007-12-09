@@ -22,4 +22,12 @@ functional_tests do
   test "disconnected? is true" do
     assert_equal true, ActiveRecord::Base.disconnected?
   end
+  
+  test "inspect does not blow up" do
+    assert_nothing_raised { Person.inspect }
+  end
+  
+  test "table_exists?" do
+    assert_equal true, Person.table_exists?
+  end
 end
