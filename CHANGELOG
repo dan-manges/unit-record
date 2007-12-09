@@ -1,3 +1,7 @@
+*0.4.0* (December 9th, 2007)
+
+* Rails 2.0 compatibility.
+
 *0.3.0* (August 22nd, 2007)
 
 * Works with models using non-conventional table names.
