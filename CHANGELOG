@@ -1,3 +1,7 @@
+*0.4.1* (December 10th, 2007)
+
+* Stub caching for compatibility with ActionController::Caching::SqlCache in Rails 2.
+
 *0.4.0* (December 9th, 2007)
 
 * Rails 2.0 compatibility.

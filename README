@@ -51,6 +51,10 @@ The <tt>disconnect!</tt> method will do everything necessary to run your unit te
 Thanks to Jay Fields for the original implementation:
 http://blog.jayfields.com/2007/03/rails-activerecord-unit-testing-part-ii.html
 
+== Contributors
+
+* Rob Sanheim
+
 == License
 Released under Ruby's license.
 http://www.ruby-lang.org/en/LICENSE.txt
