@@ -9,6 +9,9 @@ if version = ENV['RAILS_VERSION']
 end
 require 'active_record'
 require 'active_record/fixtures'
+require "action_controller"
+require "action_controller/test_case"
+require "action_controller/test_process"
 
 begin
   require 'mocha'
