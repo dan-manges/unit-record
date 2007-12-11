@@ -4,13 +4,16 @@ RAILS_ROOT = File.dirname(__FILE__)
 require 'rubygems'
 require 'test/unit'
 
-if version = ENV['RAILS_VERSION']
-  gem "rails", version
+if rails_version = ENV['RAILS_VERSION']
+  gem "rails", rails_version
 end
+require "rails/version"
 require 'active_record'
 require 'active_record/fixtures'
 require "action_controller"
-require "action_controller/test_case"
+if Rails::VERSION::MAJOR == 2
+  require "action_controller/test_case"
+end
 require "action_controller/test_process"
 
 begin
