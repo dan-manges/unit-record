@@ -1,3 +1,8 @@
+*SVN
+
+* Added UnitRecord::AssociationStubbing module to stub associations. Is not included by default.
+* Give exception message if trying to use fixtures instead of failing silently.
+
 *0.4.1* (December 10th, 2007)
 
 * Stub caching for compatibility with ActionController::Caching::SqlCache in Rails 2.

@@ -32,13 +32,23 @@ Test::Unit::TestCase.use_transactional_fixtures = true
 #   return unless defined?(ActiveRecord::Base) && !ActiveRecord::Base.configurations.blank?
 ActiveRecord::Base.configurations = {"irrelevant" => {:adapter => "stub"}}
 
+ActiveRecord::Base.send :include, UnitRecord::AssociationStubbing
+
 class Preference < ActiveRecord::Base
 end
+
 class Person < ActiveRecord::Base
+  has_many :pets
 end
+
+class Pet < ActiveRecord::Base
+  belongs_to :person
+end
+
 class Foo < ActiveRecord::Base
   set_table_name :foofoo
 end
+
 class DoesNotExist < ActiveRecord::Base
   set_table_name "table_does_not_exist"
 end

@@ -1,3 +1,4 @@
+require "unit_record/association_stubbing"
 require "unit_record/column_cacher"
 require "unit_record/column_extension"
 require "unit_record/disconnected_active_record"
