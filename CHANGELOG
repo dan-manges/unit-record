@@ -1,4 +1,4 @@
-*SVN
+*HEAD
 
 * Added UnitRecord::AssociationStubbing module to stub associations. Is not included by default.
 * Give exception message if trying to use fixtures instead of failing silently.
