@@ -8,6 +8,7 @@ if rails_version = ENV['RAILS_VERSION']
   gem "rails", rails_version
 end
 require "rails/version"
+puts "==== Testing with Rails #{Rails::VERSION::STRING} ===="
 require 'active_record'
 require 'active_record/fixtures'
 require "action_controller"

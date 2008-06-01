@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Manges"]
   s.autorequire = %q{unit_record}
-  s.date = %q{2008-05-20}
+  s.date = %q{2008-06-01}
   s.description = %q{UnitRecord enables unit testing without hitting the database.}
   s.email = %q{daniel.manges@gmail.com}
   s.extra_rdoc_files = ["README", "CHANGELOG"]

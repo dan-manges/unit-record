@@ -72,7 +72,7 @@ namespace :gemspec do
   end
 end
 
-RAILS_VERSIONS = %w[1.2.6 2.0.2]
+RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0]
 
 namespace :test do
   desc "test with multiple versions of rails"
