@@ -72,6 +72,13 @@ namespace :gemspec do
   end
 end
 
+task :readme do
+  require "rubygems"; gem "BlueCloth"; require "BlueCloth"; require 'tmpdir'
+  file = "#{Dir.tmpdir}/readme.html"
+  File.open(file, "w") { |f| f.write BlueCloth.new(File.read("README.markdown")).to_html }
+  sh "open #{file}"
+end
+
 RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0 2.1.1]
 
 namespace :test do
