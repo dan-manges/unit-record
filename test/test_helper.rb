@@ -40,6 +40,11 @@ end
 
 class Person < ActiveRecord::Base
   has_many :pets
+  has_one :profile
+end
+
+class Profile < ActiveRecord::Base
+  belongs_to :person
 end
 
 class Pet < ActiveRecord::Base

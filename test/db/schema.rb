@@ -9,6 +9,11 @@ ActiveRecord::Schema.define(:version => 0) do
     t.column :last_name,  :string
   end
   
+  create_table "profiles", :force => true do |t|
+    t.column "description", :string
+    t.column "person_id", :integer
+  end
+  
   create_table :pets, :force => true do |t|
     t.column :name, :string
   end

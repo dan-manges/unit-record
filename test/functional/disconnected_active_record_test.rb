@@ -1,22 +1,22 @@
 require File.dirname(__FILE__) + "/functional_test_helper"
 
 functional_tests do
-  test "accessing connection raises" do
-    assert_raises(RuntimeError) { ActiveRecord::Base.connection }
+  test "trying to execute a query raises" do
+    assert_raises(RuntimeError) { ActiveRecord::Base.connection.execute "SELECT 1" }
   end
   
-  test "accessing connection gives exception message with class name" do
+  test "find_by_sql gives disconnected exception message" do
     exception = nil
     begin
-      Person.connection
+      Person.find_by_sql "SELECT * FROM people"
     rescue => exception
     end
     assert_not_nil exception
-    assert_equal "(from Person): ActiveRecord is disconnected; database access is unavailable in unit tests.", exception.message
+    assert_equal "ActiveRecord is disconnected; database access is unavailable in unit tests.", exception.message
   end
   
-  test "connected? is false" do
-    assert_equal false, ActiveRecord::Base.connected?
+  test "connected? is true" do
+    assert_equal true, ActiveRecord::Base.connected?
   end
   
   test "disconnected? is true" do
@@ -29,5 +29,13 @@ functional_tests do
   
   test "table_exists?" do
     assert_equal true, Person.table_exists?
+    if ActiveRecord::Base.connection.respond_to?(:table_exists?)
+      assert_equal false, ActiveRecord::Base.connection.table_exists?("bogus_table")
+    end
+  end
+  
+  test "setting a has_one association" do
+    person = Person.new
+    person.profile = Profile.new
   end
 end

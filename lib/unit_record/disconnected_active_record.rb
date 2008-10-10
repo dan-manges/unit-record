@@ -5,35 +5,36 @@ module UnitRecord
     end
     def disconnect!
       return if disconnected?
+      establish_connection :adapter => "unit_record"
       (class << self; self; end).class_eval do
-        def cache
-          yield
-        end
-        
+        # def cache
+        #   yield
+        # end
+        # 
         def cached_columns
           @@_cached_columns ||= {}
         end
         
-        def columns
-          cached_columns[table_name] ||
-           raise("Columns are not cached for '#{table_name}' - check schema.rb")
-        end
+        # def columns
+        #   cached_columns[table_name] ||
+        #    raise("Columns are not cached for '#{table_name}' - check schema.rb")
+        # end
         
-        def connection
-          raise "(from #{to_s}): ActiveRecord is disconnected; database access is unavailable in unit tests."
-        end
-        
-        def connected?
-          false
-        end
+        # def connection
+        #   raise "(from #{to_s}): ActiveRecord is disconnected; database access is unavailable in unit tests."
+        # end
+        # 
+        # def connected?
+        #   false
+        # end
         
         def disconnected?
           true
         end
         
-        def table_exists?
-          true
-        end
+        # def table_exists?
+        #   true
+        # end
       end
       Fixtures.disconnect!
       Test::Unit::TestCase.disconnect!
