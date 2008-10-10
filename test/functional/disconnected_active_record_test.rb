@@ -38,4 +38,15 @@ functional_tests do
     person = Person.new
     person.profile = Profile.new
   end
+  
+  test "boolean columns do type casting" do
+    pref = Preference.new
+    pref.show_help = "0"
+    assert_equal false, pref.send(:read_attribute, :show_help)
+    assert_equal false, pref.show_help
+    assert_equal false, pref.show_help?
+    pref.show_help = "1"
+    assert_equal true, pref.show_help
+    assert_equal true, pref.show_help?
+  end
 end
