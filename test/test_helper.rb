@@ -1,3 +1,5 @@
+unless defined?(TEST_HELPER_LOADED)
+TEST_HELPER_LOADED = true
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 RAILS_ROOT = File.dirname(__FILE__)
 
@@ -57,4 +59,9 @@ end
 
 class DoesNotExist < ActiveRecord::Base
   set_table_name "table_does_not_exist"
+end
+
+ActiveRecord::Base.disconnect! :strategy => :raise
+# make sure calling disconnect multiple times does not cause problems
+ActiveRecord::Base.disconnect!
 end

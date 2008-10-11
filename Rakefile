@@ -7,18 +7,9 @@ require 'rake/contrib/sshpublisher'
 desc "Default: run tests"
 task :default => :test
 
-desc "Run all tests"
-task :test => %w[test:unit test:functional]
-
-Rake::TestTask.new("test:unit") do |t|
+Rake::TestTask.new("test") do |t|
   t.libs << 'lib'
-  t.pattern = 'test/unit/**/*_test.rb'
-  t.verbose = true
-end
-
-Rake::TestTask.new("test:functional") do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/functional/**/*_test.rb'
+  t.pattern = 'test/**/*_test.rb'
   t.verbose = true
 end
 

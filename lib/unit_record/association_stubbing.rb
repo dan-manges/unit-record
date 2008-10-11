@@ -28,12 +28,7 @@ module UnitRecord
 
     def self.included(klass)
       klass.class_eval do
-        unless \
-            # TODO: better way to check this?
-            # rails 1.2.x
-            public_instance_methods.include?("initialize_without_association_stubbing") ||
-            # rails 2.x
-            private_instance_methods.include?("initialize_without_association_stubbing")
+        unless (instance_methods + private_instance_methods).include?("initialize_without_association_stubbing")
           alias_method_chain :initialize, :association_stubbing
         end
       end

@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/functional_test_helper"
+require File.dirname(__FILE__) + "/../test_helper"
 
 functional_tests do
   test "use_transactional_fixtures is false" do

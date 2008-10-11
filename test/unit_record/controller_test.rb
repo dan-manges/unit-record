@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/functional_test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class SampleController < ActionController::Base
   def sample_action
