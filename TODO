@@ -1,7 +1,5 @@
 * Figure out Fixtures (take require out of unit_test_active_record.rb?)
 * Associations
 * only stub associations if using stubs
-* implement as connection adapters
 * check primary key column
 * no-op
-* raise on all of the NotImplemented methods in the abstract adapter

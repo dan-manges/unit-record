@@ -1,10 +1,6 @@
 require File.dirname(__FILE__) + "/functional_test_helper"
 
-functional_tests do
-  test "trying to execute a query raises" do
-    assert_raises(RuntimeError) { ActiveRecord::Base.connection.execute "SELECT 1" }
-  end
-  
+functional_tests do  
   test "find_by_sql gives disconnected exception message" do
     exception = nil
     begin
