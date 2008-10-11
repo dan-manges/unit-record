@@ -18,10 +18,6 @@ functional_tests do
     assert_equal expected, Preference.columns.detect { |c| c.name == "show_help" }
   end
   
-  test "add_index does not blow up" do
-    assert_nothing_raised { UnitRecord::ColumnCacher.new.add_index("people", "first_name") }
-  end
-  
   test "boolean columns" do
     expected = ActiveRecord::ConnectionAdapters::Column.new("show_help", true, "tinyint(1)", nil)
     expected.primary = false
