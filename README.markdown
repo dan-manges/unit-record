@@ -47,8 +47,8 @@ The <tt>functional_test_helper.rb</tt> file only needs to require <tt>test_helpe
 
 For moving unit tests, you have a few options.  I recommend moving them to unit/models and then disconnecting your unit tests from the database.  Any tests that fail should then be modified to not hit the database or moved to functional/models.
 
-Disconnecting
--------------
+Usage
+-----
 
 In the <tt>test/unit/unit\_test\_helper.rb</tt> file you created when restructuring your test directory, you should add these lines:
 
@@ -58,10 +58,38 @@ In the <tt>test/unit/unit\_test\_helper.rb</tt> file you created when restructur
   
 The <tt>disconnect!</tt> method will do everything necessary to run your unit tests without hitting the database.
 
+There are two options for what should happen if you hit the database. You can either have UnitRecord raise an exception, or simply no-op. Raising an exception can help identify why a test is failing, but it also may be inconvenient to work around.
+
+If you want to raise an exception:
+
+    ActiveRecord::Base.disconnect! :strategy => :raise
+    
+    Person.find(:all)
+    #=> RuntimeError: ActiveRecord is disconnected; database access is unavailable in unit tests.
+
+If you want to no-op:
+
+    ActiveRecord::Base.disconnect! :strategy => :noop
+    
+    Person.find(:all)
+    #=> []
+    
+You can also change strategies within a block:
+
+    ActiveRecord::Base.connection.change_strategy(:raise) do
+      Person.find(:all)
+      #=> RuntimeError: ActiveRecord is disconnected; database access is unavailable in unit tests.
+    end
+
+    ActiveRecord::Base.connection.change_strategy(:noop) do
+      Person.find(:all)
+      #=> []
+    end
+
 Development
 -----------
 
-Active development occurs on the [GitHub](http://github.com/dan-manges/unit-record). Changes are pushed to the Rubyforge git repository.
+Active development occurs on the [GitHub](http://github.com/dan-manges/unit-record). Changes are also pushed to the Rubyforge git repository.
 
 Thanks
 ------

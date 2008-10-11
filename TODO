@@ -1,5 +1,3 @@
-* Figure out Fixtures (take require out of unit_test_active_record.rb?)
 * Associations
 * only stub associations if using stubs
 * check primary key column
-* no-op

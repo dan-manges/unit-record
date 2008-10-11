@@ -3,7 +3,7 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
 
   def initialize(config = {})
     super
-    @strategy = :raise
+    @strategy = config[:strategy] || :raise
     @cached_columns = {"schema_info" => []}
   end
   
@@ -40,11 +40,17 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
     }
   end
   
-  def noop(&block)
-    @strategy = :noop
-    yield
-  ensure
-    @strategy = :raise
+  def change_strategy(new_strategy, &block)
+    unless [:noop, :raise].include?(new_strategy.to_sym)
+      raise ArgumentError, "#{new_strategy.inspect} is not a valid strategy - valid values are :noop and :raise"
+    end
+    begin
+      old_strategy = @strategy
+      @strategy = new_strategy.to_sym
+      yield
+    ensure
+      @strategy = old_strategy
+    end
   end
   
   def execute(sql, name = nil)
@@ -82,6 +88,6 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
   end
   
   def select(sql, name = nil)
-    raise_or_noop
+    raise_or_noop []
   end
 end
