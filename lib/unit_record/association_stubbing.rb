@@ -15,7 +15,9 @@ module UnitRecord
     def extract_associations(attributes = {})
       attributes.inject({}) do |associations,(attr,value)|
         next associations unless self.class.reflections.keys.include? attr
-        associations[attr] = attributes.delete attr
+        unless value.is_a?(self.class.reflections[attr].klass)
+          associations[attr] = attributes.delete attr
+        end
         associations
       end
     end

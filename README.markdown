@@ -58,6 +58,9 @@ In the <tt>test/unit/unit\_test\_helper.rb</tt> file you created when restructur
   
 The <tt>disconnect!</tt> method will do everything necessary to run your unit tests without hitting the database.
 
+Strategy
+--------
+
 There are two options for what should happen if you hit the database. You can either have UnitRecord raise an exception, or simply no-op. Raising an exception can help identify why a test is failing, but it also may be inconvenient to work around.
 
 If you want to raise an exception:
@@ -85,11 +88,32 @@ You can also change strategies within a block:
       Person.find(:all)
       #=> []
     end
+    
+Association Stubbing
+--------------------
+
+One painful aspect of unit testing ActiveRecord classes is setting associations. Because Rails does type checking when setting an association, you'll receive an exception if you try to use a stub in place of the expected class.
+
+    Pet.new :owner => stub("person")
+    #=> ActiveRecord::AssociationTypeMismatch: Person(#16620740) expected, got Mocha::Mock(#11567340)
+    
+If you're using mocha, you can have UnitRecord stub associations. To enable association stubbing:
+
+    ActiveRecord::Base.disconnect! :stub_associations => true
+
+The above example would no longer raise an exception. It would be the equivalent of:
+
+    pet = Pet.new
+    pet.stubs(:owner).returns(stub("person"))
+    
+Note that using this approach, the setter for the association will not work for that instance.
 
 Development
 -----------
 
 Active development occurs on the [GitHub](http://github.com/dan-manges/unit-record). Changes are also pushed to the Rubyforge git repository.
+
+For bugs/patches/etc please use the [Rubyforge tracker](http://rubyforge.org/tracker/?group_id=4239).
 
 Thanks
 ------

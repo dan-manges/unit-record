@@ -35,8 +35,6 @@ Test::Unit::TestCase.use_transactional_fixtures = true
 #   return unless defined?(ActiveRecord::Base) && !ActiveRecord::Base.configurations.blank?
 ActiveRecord::Base.configurations = {"irrelevant" => {:adapter => "stub"}}
 
-ActiveRecord::Base.send :include, UnitRecord::AssociationStubbing
-
 class Preference < ActiveRecord::Base
 end
 
@@ -61,7 +59,7 @@ class DoesNotExist < ActiveRecord::Base
   set_table_name "table_does_not_exist"
 end
 
-ActiveRecord::Base.disconnect! :strategy => :raise
+ActiveRecord::Base.disconnect! :strategy => :raise, :stub_associations => true
 # make sure calling disconnect multiple times does not cause problems
-ActiveRecord::Base.disconnect!
+ActiveRecord::Base.disconnect! :strategy => :raise, :stub_associations => true
 end
