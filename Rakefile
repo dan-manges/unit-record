@@ -1,6 +1,5 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
 require 'rake/gempackagetask'
 require 'rake/contrib/sshpublisher'
 
@@ -13,38 +12,21 @@ Rake::TestTask.new("test") do |t|
   t.verbose = true
 end
 
-desc "Generate documentation"
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = "doc"
-  rdoc.title    = "UnitRecord"
-  rdoc.options << '--line-numbers'
-  rdoc.rdoc_files.include('README.rdoc', 'CHANGELOG')
-end
-
-desc "Upload RDoc to RubyForge"
-task :publish_rdoc => [:rdoc] do
-  Rake::SshDirPublisher.new("dcmanges@rubyforge.org", "/var/www/gforge-projects/unit-test-ar", "doc").upload
-end
-
 Gem.manage_gems
 require "date"
 
 gem_spec = Gem::Specification.new do |s|
 	s.name   = "unit_record"
   s.summary = "UnitRecord enables unit testing without hitting the database."
-	s.version = "0.4.1"
+	s.version = "0.9.0"
 	s.author = "Dan Manges"
 	s.description = "UnitRecord enables unit testing without hitting the database."
 	s.email = "daniel.manges@gmail.com"
   s.homepage = "http://unit-test-ar.rubyforge.org"
   s.rubyforge_project = "unit-test-ar"
 
-  s.has_rdoc = true
-  s.extra_rdoc_files = ['README.rdoc', 'CHANGELOG']
-  s.rdoc_options << '--title' << "UnitRecord" << '--main' << 'README.rdoc' << '--line-numbers'
-
   s.autorequire = "unit_record"
-  s.files = FileList['{lib,test}/**/*.rb', 'CHANGELOG', 'README.rdoc', 'Rakefile'].to_a
+  s.files = FileList['{lib,test}/**/*.rb', 'CHANGELOG', 'README.markdown', 'Rakefile'].to_a
 end
 
 Rake::GemPackageTask.new(gem_spec) do |package|

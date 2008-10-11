@@ -56,6 +56,10 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
   def execute(sql, name = nil)
     raise_or_noop
   end
+  
+  def insert(sql, name = nil, pk = nil, id_value = nil, sequence_name = nil)
+    raise_or_noop
+  end if Rails::VERSION::MAJOR == 1
 
   def select_rows(sql, name = nil)
     raise_or_noop []

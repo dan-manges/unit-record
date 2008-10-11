@@ -1,7 +1,16 @@
 *HEAD
 
-* Added UnitRecord::AssociationStubbing module to stub associations. Is not included by default.
-* Give exception message if trying to use fixtures instead of failing silently.
+* Add association stubbing with mocha
+
+  ActiveRecord::Base.disconnect! :stub_associations => true
+
+* Add option to no-op instead of raise.
+
+  ActiveRecord::Base.disconnect! :strategy => :noop
+  or
+  ActiveRecord::Base.disconnect! :strategy => :raise
+  
+* Implemented as a connection adapter
 
 *0.4.1* (December 10th, 2007)
 

@@ -52,6 +52,12 @@ functional_tests do
       ActiveRecord::Base.connection.rename_column "people", "first_name", "name_first"
     end
   end
+
+  test "insert raises an exception" do
+    assert_raises_disconnected_exception do
+      ActiveRecord::Base.connection.rename_column "people", "first_name", "name_first"
+    end
+  end
   
   test "initialize can set strategy" do
     ActiveRecord::Base.establish_connection :adapter => "unit_record", :strategy => :noop
@@ -63,6 +69,7 @@ functional_tests do
   test "noop" do
     ActiveRecord::Base.connection.change_strategy(:noop) do
       assert_nil ActiveRecord::Base.connection.execute("SELECT 1")
+      assert_nil ActiveRecord::Base.connection.insert("INSERT INTO ...")
       assert_equal [], ActiveRecord::Base.connection.select_rows("SELECT * FROM people")
       assert_equal [], ActiveRecord::Base.connection.send(:select, "SELECT * FROM people")
       assert_nil ActiveRecord::Base.connection.rename_table("people", "persons")

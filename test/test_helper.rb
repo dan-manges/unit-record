@@ -27,7 +27,8 @@ rescue LoadError
 end
 Test::Unit::TestCase.disallow_setup!
 
-require "#{File.dirname(__FILE__)}/../init"
+$LOAD_PATH << File.dirname(__FILE__) + "/../lib"
+require "unit_record"
 
 Test::Unit::TestCase.use_transactional_fixtures = true
 
