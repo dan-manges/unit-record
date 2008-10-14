@@ -8,7 +8,7 @@ task :default => "test:multi_verbose"
 
 Rake::TestTask.new("test") do |t|
   t.libs << 'lib'
-  t.pattern = 'test/**/*_test.rb'
+  t.pattern = 'test/{active_record,unit_record}/**/*_test.rb'
   t.verbose = true
 end
 
@@ -64,7 +64,7 @@ namespace :test do
   
   task :multi_verbose do
     # TODO: runcoderun doesn't have rails 2.1.1 installed right now
-    (RAILS_VERSIONS -= %w[2.1.1]).each do |rails_version|
+    (RAILS_VERSIONS - %w[2.1.1]).each do |rails_version|
       sh "RAILS_VERSION='#{rails_version}' rake test"
     end
   end

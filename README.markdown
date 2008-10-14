@@ -115,6 +115,8 @@ Active development occurs on the [GitHub](http://github.com/dan-manges/unit-reco
 
 For bugs/patches/etc please use the [Rubyforge tracker](http://rubyforge.org/tracker/?group_id=4239).
 
+Continuous integration is provided by [RunCodeRun](http://runcoderun.com/dan-manges/unit-record).
+
 Thanks
 ------
 Thanks to Jay Fields for the [original implementation](http://blog.jayfields.com/2007/03/rails-activerecord-unit-testing-part-ii.html).
