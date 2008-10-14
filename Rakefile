@@ -4,7 +4,7 @@ require 'rake/gempackagetask'
 require 'rake/contrib/sshpublisher'
 
 desc "Default: run tests"
-task :default => :test
+task :default => "test:multi_verbose"
 
 Rake::TestTask.new("test") do |t|
   t.libs << 'lib'
@@ -60,7 +60,14 @@ namespace :test do
     RAILS_VERSIONS.each do |rails_version|
       sh "RAILS_VERSION='#{rails_version}' rake test > /dev/null 2>&1"
     end
-  end      
+  end
+  
+  task :multi_verbose do
+    # TODO: runcoderun doesn't have rails 2.1.1 installed right now
+    (RAILS_VERSIONS -= %w[2.1.1]).each do |rails_version|
+      sh "RAILS_VERSION='#{rails_version}' rake test"
+    end
+  end
 end
 
 desc "pre-commit task"

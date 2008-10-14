@@ -20,11 +20,13 @@ end
 require "action_controller/test_process"
 
 begin
+  gem "mocha"
   require 'mocha'
-  require 'dust'
-rescue LoadError
-  raise "Need Mocha and Dust gems to Test"
+rescue LoadError, Gem::LoadError
+  raise "need mocha to test"
 end
+$LOAD_PATH << File.dirname(__FILE__) + "/vendor/dust-0.1.6/lib"
+require 'dust'
 Test::Unit::TestCase.disallow_setup!
 
 $LOAD_PATH << File.dirname(__FILE__) + "/../lib"
