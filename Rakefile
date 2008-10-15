@@ -63,8 +63,7 @@ namespace :test do
   end
   
   task :multi_verbose do
-    # TODO: runcoderun doesn't have rails 2.1.1 installed right now
-    (RAILS_VERSIONS - %w[2.1.1]).each do |rails_version|
+    RAILS_VERSIONS.each do |rails_version|
       sh "RAILS_VERSION='#{rails_version}' rake test"
     end
   end
