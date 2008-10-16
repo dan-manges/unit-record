@@ -6,10 +6,22 @@ require 'rake/contrib/sshpublisher'
 desc "Default: run tests"
 task :default => "test:multi_verbose"
 
+TEST_PATTERN = 'test/{active_record,unit_record}/**/*_test.rb'
+
 Rake::TestTask.new("test") do |t|
-  t.libs << 'lib'
-  t.pattern = 'test/{active_record,unit_record}/**/*_test.rb'
+  t.pattern = TEST_PATTERN
   t.verbose = true
+end
+
+begin
+  require "rcov/rcovtask"
+  desc "run tests with rcov"
+  Rcov::RcovTask.new do |t|
+    t.pattern = TEST_PATTERN
+    t.rcov_opts << ["--no-html", "--exclude 'Library,#{Gem.path.join(',')}'"]
+    t.verbose = true
+  end
+rescue LoadError
 end
 
 Gem.manage_gems
@@ -64,7 +76,7 @@ namespace :test do
   
   task :multi_verbose do
     RAILS_VERSIONS.each do |rails_version|
-      sh "RAILS_VERSION='#{rails_version}' rake test"
+      sh "RAILS_VERSION='#{rails_version}' rake rcov"
     end
   end
 end
