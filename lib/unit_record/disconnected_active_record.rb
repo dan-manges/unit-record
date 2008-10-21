@@ -17,6 +17,7 @@ module UnitRecord
       end
       Fixtures.disconnect!
       Test::Unit::TestCase.disconnect!
+      ActiveRecord::Migration.verbose = false
       ActiveRecord::Base.connection.change_strategy(:noop) do
         load(RAILS_ROOT + "/db/schema.rb")
       end

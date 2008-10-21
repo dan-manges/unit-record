@@ -45,4 +45,8 @@ functional_tests do
     assert_equal true, pref.show_help
     assert_equal true, pref.show_help?
   end
+  
+  test "migrations are not verbose" do
+    assert_equal false, ActiveRecord::Migration.verbose
+  end
 end

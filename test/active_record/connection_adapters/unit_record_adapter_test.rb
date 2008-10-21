@@ -2,6 +2,12 @@ require File.dirname(__FILE__) + "/../../test_helper"
 
 functional_tests do
 
+  test "reconnect works" do
+    ActiveRecord::Base.connection.reconnect!
+    assert_kind_of ActiveRecord::ConnectionAdapters::UnitRecordAdapter,
+      ActiveRecord::Base.connection
+  end
+
   test "find(:all)" do
     ActiveRecord::Base.connection.change_strategy(:raise) do
       assert_raises(RuntimeError) { Person.find(:all) }
