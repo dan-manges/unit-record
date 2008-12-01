@@ -64,18 +64,19 @@ task :readme do
   sh "open #{file}"
 end
 
-RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0 2.1.1]
+RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0 2.1.1 2.2.2]
 
 namespace :test do
   desc "test with multiple versions of rails"
   task :multi do
     RAILS_VERSIONS.each do |rails_version|
+      puts "Testing with Rails #{rails_version}"
       sh "RAILS_VERSION='#{rails_version}' rake test > /dev/null 2>&1"
     end
   end
   
   task :multi_verbose do
-    RAILS_VERSIONS.each do |rails_version|
+    (RAILS_VERSIONS - %w[2.2.2]).each do |rails_version|
       sh "RAILS_VERSION='#{rails_version}' rake rcov"
     end
   end
