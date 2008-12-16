@@ -8,7 +8,7 @@ Why?
 
 Rationale: [http://www.dcmanges.com/blog/rails-unit-record-test-without-the-database](http://www.dcmanges.com/blog/rails-unit-record-test-without-the-database)
 
-The biggest benefit to disconnecting unit tests from the database is having a faster test suite.  Here is the benchmark from one of my current projects:
+One of the biggest benefits to disconnecting unit tests from the database is having a faster test suite.  Here is the benchmark from one of my current projects:
 
     Finished in 19.302702 seconds.
     4920 tests, 7878 assertions, 0 failures, 0 errors

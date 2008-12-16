@@ -1,7 +1,7 @@
 module UnitRecord
   module DisconnectedActiveRecord
     def disconnected?
-      false
+      connected? && connection.is_a?(ActiveRecord::ConnectionAdapters::UnitRecordAdapter)
     end
 
     def disconnect!(options = {})
@@ -9,11 +9,6 @@ module UnitRecord
       establish_connection options.merge(:adapter => "unit_record")
       if options[:stub_associations]
         ActiveRecord::Base.send :include, UnitRecord::AssociationStubbing
-      end
-      (class << self; self; end).class_eval do
-        def disconnected?
-          true
-        end
       end
       Fixtures.disconnect!
       Test::Unit::TestCase.disconnect!

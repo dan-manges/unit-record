@@ -1,7 +1,5 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/gempackagetask'
-require 'rake/contrib/sshpublisher'
 
 desc "Default: run tests"
 task :default => %w[test:multi_verbose spec]
@@ -22,7 +20,6 @@ begin
 rescue LoadError
 end
 
-Gem.manage_gems
 require "date"
 
 gem_spec = Gem::Specification.new do |s|
@@ -41,11 +38,9 @@ gem_spec = Gem::Specification.new do |s|
   s.files = FileList['{lib,test,vendor}/**/*.rb', 'CHANGELOG', 'LICENSE', 'README.markdown', 'Rakefile'].to_a
 end
 
-Rake::GemPackageTask.new(gem_spec) do |package|
-  package.need_zip = false
-  package.need_tar = false
+task :gem => %w[test:multi] do
+  Gem::Builder.new(gem_spec).build
 end
-Rake::Task["gem"].prerequisites.unshift "test:multi"
 
 namespace :gemspec do
   desc "generates unit-record.gemspec"
@@ -77,7 +72,8 @@ namespace :test do
   
   task :multi_verbose do
     (RAILS_VERSIONS - %w[2.2.2]).each do |rails_version|
-      sh "RAILS_VERSION='#{rails_version}' rake rcov"
+      task = defined?(Rcov) ? "rcov" : "test"
+      sh "RAILS_VERSION='#{rails_version}' rake #{task}"
     end
   end
 end
@@ -95,4 +91,4 @@ rescue LoadError
 end
 
 desc "pre-commit task"
-task :pc => %w[test:multi gemspec:generate]
+task :pc => %w[test:multi spec gemspec:generate]
