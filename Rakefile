@@ -71,7 +71,7 @@ namespace :test do
   end
   
   task :multi_verbose do
-    (RAILS_VERSIONS - %w[2.2.2]).each do |rails_version|
+    (RAILS_VERSIONS - %w[2.2.2 2.3.1]).each do |rails_version|
       task = defined?(Rcov) ? "rcov" : "test"
       sh "RAILS_VERSION='#{rails_version}' rake #{task}"
     end
