@@ -2,13 +2,13 @@ require File.dirname(__FILE__) + "/../test_helper"
 
 functional_tests do
   test "use_transactional_fixtures is false" do
-    assert_equal false, Test::Unit::TestCase.use_transactional_fixtures
+    assert_equal false, UnitRecord.base_rails_test_class.use_transactional_fixtures
   end
   
   test "trying to use fixtures gives useful message" do
     exception = nil
     begin
-      Class.new(Test::Unit::TestCase) do
+      Class.new(UnitRecord.base_rails_test_class) do
         fixtures :users
       end
     rescue => exception

@@ -59,7 +59,7 @@ task :readme do
   sh "open #{file}"
 end
 
-RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0 2.1.1 2.2.2]
+RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0 2.1.1 2.2.2 2.3.1]
 
 namespace :test do
   desc "test with multiple versions of rails"

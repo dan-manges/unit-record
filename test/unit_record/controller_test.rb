@@ -18,8 +18,10 @@ if defined?(ActionController::TestCase) # Rails 2
       assert_equal "OK", @response.body
     end
   
-    test "sql caching is enabled" do
-      assert_equal true, (SampleController < ActionController::Caching::SqlCache)
+    if defined?(ActionController::Caching::SqlCache) # SqlCache goes away in Rails 2.3.1
+      test "sql caching is enabled" do
+        assert_equal true, (SampleController < ActionController::Caching::SqlCache)
+      end
     end
   end
 

@@ -32,7 +32,12 @@ Test::Unit::TestCase.disallow_setup!
 $LOAD_PATH << File.dirname(__FILE__) + "/../lib"
 require "unit_record"
 
-Test::Unit::TestCase.use_transactional_fixtures = true
+if UnitRecord.rails_version >= "2.3"
+  require "active_support/test_case"
+  ActiveSupport::TestCase.class_eval { include ActiveRecord::TestFixtures }
+end
+
+UnitRecord.base_rails_test_class.use_transactional_fixtures = true
 
 # Needed because of this line in setup_with_fixtures and teardown_with_fixtures:
 #   return unless defined?(ActiveRecord::Base) && !ActiveRecord::Base.configurations.blank?

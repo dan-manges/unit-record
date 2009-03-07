@@ -11,7 +11,7 @@ module UnitRecord
         ActiveRecord::Base.send :include, UnitRecord::AssociationStubbing
       end
       Fixtures.disconnect!
-      Test::Unit::TestCase.disconnect!
+      UnitRecord.base_rails_test_class.disconnect!
       ActiveRecord::Migration.verbose = false
       ActiveRecord::Base.connection.change_strategy(:noop) do
         load(RAILS_ROOT + "/db/schema.rb")

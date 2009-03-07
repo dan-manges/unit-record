@@ -1,4 +1,4 @@
 doc
 pkg
 *.gem
-
+.treasure_map.rb

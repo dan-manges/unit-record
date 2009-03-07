@@ -19,6 +19,10 @@ require "action_controller/test_process"
 
 require "unit_record"
 
+if UnitRecord.rails_version >= "2.3"
+  ActiveSupport::TestCase.class_eval { include ActiveRecord::TestFixtures }
+end
+
 # Needed because of this line in setup_with_fixtures and teardown_with_fixtures:
 #   return unless defined?(ActiveRecord::Base) && !ActiveRecord::Base.configurations.blank?
 ActiveRecord::Base.configurations = {"irrelevant" => {:adapter => "stub"}}
