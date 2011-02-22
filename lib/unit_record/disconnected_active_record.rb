@@ -15,7 +15,7 @@ module UnitRecord
       ActiveRecord::Migration.verbose = false
       ActiveRecord::Base.connection.change_strategy(:noop) do
         if defined?(Rails.root) && Rails.root
-          load(File.join(Rails.root, 'db', 'schema'))
+          load(File.join(Rails.root, 'db', 'schema.rb'))
         else
           load(RAILS_ROOT + "/db/schema.rb")
         end
