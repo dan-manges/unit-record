@@ -14,7 +14,11 @@ module UnitRecord
       UnitRecord.base_rails_test_class.disconnect!
       ActiveRecord::Migration.verbose = false
       ActiveRecord::Base.connection.change_strategy(:noop) do
-        load(RAILS_ROOT + "/db/schema.rb")
+        if defined?(Rails.root) && Rails.root
+          load(File.join(Rails.root, 'db', 'schema'))
+        else
+          load(RAILS_ROOT + "/db/schema.rb")
+        end
       end
     end
   end
