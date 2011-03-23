@@ -31,7 +31,7 @@ gem_spec = Gem::Specification.new do |s|
 	s.email = "daniel.manges@gmail.com"
   s.homepage = "http://unit-test-ar.rubyforge.org"
   s.rubyforge_project = "unit-test-ar"
-  
+
   s.has_rdoc = false
 
   s.autorequire = "unit_record"
@@ -59,7 +59,7 @@ task :readme do
   sh "open #{file}"
 end
 
-RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0 2.1.1 2.2.2 2.3.1]
+RAILS_VERSIONS = %w[1.2.6 2.0.2 2.1.0 2.1.1 2.2.2 2.3.2]
 
 namespace :test do
   desc "test with multiple versions of rails"
@@ -69,7 +69,7 @@ namespace :test do
       sh "RAILS_VERSION='#{rails_version}' rake test > /dev/null 2>&1"
     end
   end
-  
+
   task :multi_verbose do
     (RAILS_VERSIONS - %w[]).each do |rails_version|
       task = defined?(Rcov) ? "rcov" : "test"
@@ -80,7 +80,7 @@ namespace :test do
 end
 
 begin
-  gem "rspec"
+  gem "rspec", "1.1.11"
   require "spec/rake/spectask"
   Spec::Rake::SpecTask.new(:spec) do |t|
     t.spec_files = %w[test/sample_spec.rb]
