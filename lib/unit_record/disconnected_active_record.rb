@@ -14,7 +14,8 @@ module UnitRecord
       UnitRecord.base_rails_test_class.disconnect!
       ActiveRecord::Migration.verbose = false
       ActiveRecord::Base.connection.change_strategy(:noop) do
-        load(RAILS_ROOT + "/db/schema.rb")
+        rails_root = Rails.respond_to?(:root) ? Rails.root : RAILS_ROOT
+        load(rails_root + "/db/schema.rb")
       end
     end
   end

@@ -12,7 +12,7 @@ One of the biggest benefits to disconnecting unit tests from the database is hav
 
     Finished in 19.302702 seconds.
     4920 tests, 7878 assertions, 0 failures, 0 errors
-  
+
 4 seconds per 1,000 tests is a good guideline.
 
 Installation
@@ -55,7 +55,7 @@ In the <tt>test/unit/unit\_test\_helper.rb</tt> file you created when restructur
     require File.dirname(__FILE__) + "/../test_helper"
     require "unit_record"
     ActiveRecord::Base.disconnect!
-  
+
 The <tt>disconnect!</tt> method will do everything necessary to run your unit tests without hitting the database.
 
 Strategy
@@ -66,17 +66,17 @@ There are two options for what should happen if you hit the database. You can ei
 If you want to raise an exception:
 
     ActiveRecord::Base.disconnect! :strategy => :raise
-    
+
     Person.find(:all)
     #=> RuntimeError: ActiveRecord is disconnected; database access is unavailable in unit tests.
 
 If you want to no-op:
 
     ActiveRecord::Base.disconnect! :strategy => :noop
-    
+
     Person.find(:all)
     #=> []
-    
+
 You can also change strategies within a block:
 
     ActiveRecord::Base.connection.change_strategy(:raise) do
@@ -88,7 +88,7 @@ You can also change strategies within a block:
       Person.find(:all)
       #=> []
     end
-    
+
 Association Stubbing
 --------------------
 
@@ -96,7 +96,7 @@ One painful aspect of unit testing ActiveRecord classes is setting associations.
 
     Pet.new :owner => stub("person")
     #=> ActiveRecord::AssociationTypeMismatch: Person(#16620740) expected, got Mocha::Mock(#11567340)
-    
+
 If you're using mocha, you can have UnitRecord stub associations. To enable association stubbing:
 
     ActiveRecord::Base.disconnect! :stub_associations => true
@@ -105,7 +105,7 @@ The above example would no longer raise an exception. It would be the equivalent
 
     pet = Pet.new
     pet.stubs(:owner).returns(stub("person"))
-    
+
 Note that using this approach, the setter for the association will not work for that instance.
 
 Development
@@ -129,9 +129,11 @@ Maintainer
 Contributors
 ------------
 
+* Arvind Laxminarayan
 * David Lowenfels
 * Rob Sanheim
 
 License
 -------
 Released under the MIT license
+

@@ -17,7 +17,9 @@ require "action_controller"
 if Rails::VERSION::MAJOR == 2
   require "action_controller/test_case"
 end
-require "action_controller/test_process"
+if [1, 2].include?(Rails::VERSION::MAJOR)
+  require "action_controller/test_process"
+end
 
 begin
   gem "mocha"

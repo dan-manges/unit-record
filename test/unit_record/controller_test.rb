@@ -6,18 +6,24 @@ class SampleController < ActionController::Base
   end
 end
 
-ActionController::Routing::Routes.add_route "/sample/sample_action", :controller => "sample", :action => "sample_action"
+case Rails::VERSION::MAJOR
+when 1, 2
+  ActionController::Routing::Routes.add_route "/sample/sample_action", :controller => "sample", :action => "sample_action"
+when 3
+end
 
-if defined?(ActionController::TestCase) # Rails 2
+if Rails::VERSION::MAJOR == 3
+  # todo
+elsif Rails::VERSION::MAJOR == 2
 
   class ControllerTest < ActionController::TestCase
     tests SampleController
-  
+
     test "render" do
       get :sample_action
       assert_equal "OK", @response.body
     end
-  
+
     if defined?(ActionController::Caching::SqlCache) # SqlCache goes away in Rails 2.3.1
       test "sql caching is enabled" do
         assert_equal true, (SampleController < ActionController::Caching::SqlCache)
@@ -25,7 +31,7 @@ if defined?(ActionController::TestCase) # Rails 2
     end
   end
 
-else # Rails 1.x
+elsif Rails::VERSION::MAJOR == 1
 
   class ControllerTest < Test::Unit::TestCase
     def setup
@@ -38,6 +44,7 @@ else # Rails 1.x
       get :sample_action
       assert_equal "OK", @response.body
     end
-  end  
-
+  end
+else
+  raise "rails version not tested"
 end

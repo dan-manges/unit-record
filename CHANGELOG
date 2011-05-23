@@ -1,3 +1,8 @@
+*HEAD*
+
+* Rails 3.0 compatibility
+* Prefer Rails.root to RAILS_ROOT (thanks Arvind Laxminarayan)
+
 *0.9.1*
 
 * Rails 2.3 compatibility
