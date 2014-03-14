@@ -1,6 +1,7 @@
 *0.9.1* (April 22, 2009)
 
 * Rails 2.3 compatibility
+* Prefer Rails.root to RAILS_ROOT
 
 *0.9.0* (December 15, 2008)
 
