@@ -1,8 +1,8 @@
-*0.9.1*
+*0.9.1* (April 22, 2009)
 
 * Rails 2.3 compatibility
 
-*0.9.0*
+*0.9.0* (December 15, 2008)
 
 * Add association stubbing with mocha
 
