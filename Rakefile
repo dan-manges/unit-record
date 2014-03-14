@@ -25,17 +25,17 @@ require "date"
 gem_spec = Gem::Specification.new do |s|
 	s.name   = "unit_record"
   s.summary = "UnitRecord enables unit testing without hitting the database."
-	s.version = "0.9.1"
+	s.version = "0.9.2"
 	s.author = "Dan Manges"
 	s.description = "UnitRecord enables unit testing without hitting the database."
-	s.email = "daniel.manges@gmail.com"
+	s.email = "dan.manges@gmail.com"
   s.homepage = "http://unit-test-ar.rubyforge.org"
   s.rubyforge_project = "unit-test-ar"
-  
+
   s.has_rdoc = false
 
   s.autorequire = "unit_record"
-  s.files = FileList['{lib,test,vendor}/**/*.rb', 'CHANGELOG', 'LICENSE', 'README.markdown', 'Rakefile'].to_a
+  s.files = FileList['{lib,test,vendor}/**/*.rb', 'CHANGELOG', 'LICENSE', 'README.md', 'Rakefile'].to_a
 end
 
 task :gem => %w[test:multi] do
@@ -55,7 +55,7 @@ end
 task :readme do
   require "rubygems"; gem "BlueCloth"; require "BlueCloth"; require 'tmpdir'
   file = "#{Dir.tmpdir}/readme.html"
-  File.open(file, "w") { |f| f.write BlueCloth.new(File.read("README.markdown")).to_html }
+  File.open(file, "w") { |f| f.write BlueCloth.new(File.read("README.md")).to_html }
   sh "open #{file}"
 end
 
@@ -69,7 +69,7 @@ namespace :test do
       sh "RAILS_VERSION='#{rails_version}' rake test > /dev/null 2>&1"
     end
   end
-  
+
   task :multi_verbose do
     (RAILS_VERSIONS - %w[]).each do |rails_version|
       task = defined?(Rcov) ? "rcov" : "test"
