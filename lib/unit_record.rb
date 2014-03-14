@@ -1,10 +1,14 @@
 module UnitRecord
   def self.rails_version
-    Rails::VERSION::STRING
+    if defined?(Rails::VERSION::STRING)
+      Rails::VERSION::STRING
+    else
+      nil
+    end
   end
-  
+
   def self.base_rails_test_class
-    if rails_version >= "2.3.1"
+    if rails_version && rails_version >= "2.3.1"
       ActiveSupport::TestCase
     else
       Test::Unit::TestCase
