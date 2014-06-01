@@ -10,11 +10,11 @@ module UnitRecord
       if options[:stub_associations]
         ActiveRecord::Base.send :include, UnitRecord::AssociationStubbing
       end
-      Fixtures.disconnect!
+      Fixtures.disconnect! if defined?(Fixtures)
       UnitRecord.base_rails_test_class.disconnect!
       ActiveRecord::Migration.verbose = false
       ActiveRecord::Base.connection.change_strategy(:noop) do
-        load(RAILS_ROOT + "/db/schema.rb")
+        load(RAILS_ROOT + "/db/schema.rb") if defined?(RAILS_ROOT)
       end
     end
   end

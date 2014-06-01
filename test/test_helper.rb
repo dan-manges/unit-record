@@ -4,27 +4,17 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 RAILS_ROOT = File.dirname(__FILE__)
 
 require 'rubygems'
-require 'test/unit'
+require 'rails/all'
 
-if rails_version = ENV['RAILS_VERSION']
-  gem "rails", rails_version
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
 end
-require "rails/version"
-puts "==== Testing with Rails #{Rails::VERSION::STRING} ===="
-require 'active_record'
-require 'active_record/fixtures'
-require "action_controller"
-if Rails::VERSION::MAJOR == 2
-  require "action_controller/test_case"
-end
-require "action_controller/test_process"
 
-begin
-  gem "mocha"
-  require 'mocha'
-rescue LoadError, Gem::LoadError
-  raise "need mocha to test"
-end
+require "action_controller/test_case" if Rails::VERSION::MAJOR == 2
+
 $LOAD_PATH << File.dirname(__FILE__) + "/../vendor/dust-0.1.6/lib"
 require 'dust'
 Test::Unit::TestCase.disallow_setup!
@@ -60,11 +50,11 @@ class Pet < ActiveRecord::Base
 end
 
 class Foo < ActiveRecord::Base
-  set_table_name :foofoo
+  self.table_name = 'foofoo'
 end
 
 class DoesNotExist < ActiveRecord::Base
-  set_table_name "table_does_not_exist"
+  self.table_name = 'table_does_not_exist'
 end
 
 ActiveRecord::Base.disconnect! :strategy => :raise, :stub_associations => true

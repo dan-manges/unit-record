@@ -1,3 +1,8 @@
+class Visitor
+  def accept(ast)
+    ''
+  end
+end
 class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::ConnectionAdapters::AbstractAdapter
   EXCEPTION_MESSAGE = "ActiveRecord is disconnected; database access is unavailable in unit tests."
 
@@ -20,6 +25,10 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
       table_definition.columns.map do |c|
         ActiveRecord::ConnectionAdapters::Column.new(c.name.to_s, c.default, c.sql_type, c.null)
       end
+  end
+
+  def primary_key(*args)
+    'id'
   end
   
   def native_database_types
@@ -53,40 +62,40 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
     end
   end
   
-  def execute(sql, name = nil)
+  def execute(*args)
     raise_or_noop
   end
   
-  def insert(sql, name = nil, pk = nil, id_value = nil, sequence_name = nil)
-    raise_or_noop
-  end if defined?(Rails::VERSION::MAJOR) && Rails::VERSION::MAJOR == 1
-
-  def select_rows(sql, name = nil)
+  def select_rows(*args)
     raise_or_noop []
   end
   
-  def rename_table(table_name, new_name)
+  def rename_table(*args)
     raise_or_noop
   end
   
-  def change_column(table_name, column_name, type, options = {})
+  def change_column(*args)
     raise_or_noop
   end
   
-  def change_column_default(table_name, column_name, default)
+  def change_column_default(*args)
     raise_or_noop
   end
 
-  def rename_column(table_name, column_name, new_column_name)
+  def rename_column(*args)
     raise_or_noop
   end
 
-  def add_foreign_key(table_name, column_names, target_table, key_name, options = {})
+  def add_foreign_key(*args)
     raise_or_noop
   end
 
   def tables
     @cached_columns.keys
+  end
+
+  def visitor
+    Visitor.new
   end
 
   protected
@@ -95,7 +104,7 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
     @strategy == :raise ? raise(EXCEPTION_MESSAGE) : noop_return_value
   end
   
-  def select(sql, name = nil)
+  def select(*args)
     raise_or_noop []
   end
 end

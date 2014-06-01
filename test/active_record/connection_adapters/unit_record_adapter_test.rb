@@ -8,12 +8,14 @@ functional_tests do
       ActiveRecord::Base.connection
   end
 
-  test "find(:all)" do
+  test "all arel" do
     ActiveRecord::Base.connection.change_strategy(:raise) do
-      assert_raises(RuntimeError) { Person.find(:all) }
+      assert_raises(RuntimeError) {
+        Person.all
+      }
     end
     ActiveRecord::Base.connection.change_strategy(:noop) do
-      assert_equal [], Person.find(:all)
+      assert_equal [], Person.all
     end
   end
   
@@ -75,7 +77,6 @@ functional_tests do
   test "noop" do
     ActiveRecord::Base.connection.change_strategy(:noop) do
       assert_nil ActiveRecord::Base.connection.execute("SELECT 1")
-      assert_nil ActiveRecord::Base.connection.insert("INSERT INTO ...")
       assert_equal [], ActiveRecord::Base.connection.select_rows("SELECT * FROM people")
       assert_equal [], ActiveRecord::Base.connection.send(:select, "SELECT * FROM people")
       assert_nil ActiveRecord::Base.connection.rename_table("people", "persons")

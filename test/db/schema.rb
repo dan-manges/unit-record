@@ -1,4 +1,4 @@
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define do
   create_table :preferences, :force => true do |t|
     t.column :some_count, :integer
     t.column :show_help, :boolean, :default => true

@@ -4,7 +4,6 @@ module UnitRecord
     private
     
     def initialize_with_association_stubbing(attributes = {})
-      attributes ||= {}
       associations = extract_associations attributes
       initialize_without_association_stubbing attributes
       stub_associations associations
