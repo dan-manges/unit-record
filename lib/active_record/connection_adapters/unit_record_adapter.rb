@@ -98,6 +98,10 @@ class ActiveRecord::ConnectionAdapters::UnitRecordAdapter < ::ActiveRecord::Conn
     Visitor.new
   end
 
+  def quote_column_name(column_name)
+    column_name.to_s
+  end
+
   protected
   
   def raise_or_noop(noop_return_value = nil)
