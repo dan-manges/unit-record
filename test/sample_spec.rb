@@ -5,8 +5,6 @@ require "spec"
 
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 
-RAILS_ROOT = File.dirname(__FILE__)
-
 if rails_version = ENV['RAILS_VERSION']
   gem "rails", rails_version
 end

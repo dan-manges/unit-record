@@ -1,10 +1,17 @@
 unless defined?(TEST_HELPER_LOADED)
 TEST_HELPER_LOADED = true
 $:.unshift(File.dirname(__FILE__) + '/../lib')
-RAILS_ROOT = File.dirname(__FILE__)
 
 require 'rubygems'
 require 'rails/all'
+
+module Rails
+  class << self
+    def root
+      @root ||= Pathname.new(File.dirname(__FILE__))
+    end
+  end
+end
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
