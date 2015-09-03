@@ -17,6 +17,10 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{unit-test-ar}
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{UnitRecord enables unit testing without hitting the database.}
+  s.add_development_dependency 'rake', '> 0'
+  s.add_development_dependency 'rails', '3.2.22'
+  s.add_development_dependency 'test-unit', '3.1.1'
+  s.add_development_dependency 'mocha', '1.1.0'
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
