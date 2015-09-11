@@ -24,7 +24,6 @@ end
 
 require "action_controller/test_case" if Rails::VERSION::MAJOR == 2
 
-$LOAD_PATH << File.dirname(__FILE__) + "/../vendor/dust-0.1.6/lib"
 require 'dust'
 Test::Unit::TestCase.disallow_setup!
 
