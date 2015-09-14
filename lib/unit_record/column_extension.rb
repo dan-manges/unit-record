@@ -5,9 +5,9 @@ module UnitRecord
         alias_method_chain :simplified_type, :boolean
       end
     end
-    
+
     def simplified_type_with_boolean(field_type)
-      return :boolean if field_type.to_s.downcase.index("tinyint(1)")
+      return :boolean if field_type.to_s.downcase.index('tinyint(1)')
       simplified_type_without_boolean field_type
     end
 

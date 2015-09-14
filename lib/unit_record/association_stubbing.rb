@@ -1,6 +1,5 @@
 module UnitRecord
   module AssociationStubbing
-
     private
 
     def initialize_with_association_stubbing(attributes = {})
@@ -12,7 +11,7 @@ module UnitRecord
     protected
 
     def extract_associations(attributes = {})
-      attributes.inject({}) do |associations,(attr,value)|
+      attributes.inject({}) do |associations, (attr, value)|
         next associations unless self.class.reflections.keys.include? attr
         unless value.is_a?(self.class.reflections[attr].klass)
           associations[attr] = attributes.delete attr
@@ -22,8 +21,8 @@ module UnitRecord
     end
 
     def stub_associations(associations = {})
-      associations.each do |attr,value|
-        self.stubs(attr).returns(value)
+      associations.each do |attr, value|
+        stubs(attr).returns(value)
       end
     end
 

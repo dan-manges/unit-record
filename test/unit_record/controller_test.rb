@@ -3,17 +3,16 @@ require File.dirname(__FILE__) + '/../test_helper'
 class SampleApplication < Rails::Application
 end
 SampleApplication.routes.draw do
-  match '/sample/sample_action', :to => 'sample#sample_action'
+  match '/sample/sample_action', to: 'sample#sample_action'
 end
 
-
 SampleApplication.routes.draw do
-  match '/sample/sample_action', :to => 'sample#sample_action'
+  match '/sample/sample_action', to: 'sample#sample_action'
 end
 class SampleController < ActionController::Base
   include SampleApplication.routes.url_helpers
   def sample_action
-    render :text => 'OK'
+    render text: 'OK'
   end
 end
 
