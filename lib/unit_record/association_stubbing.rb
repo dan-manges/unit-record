@@ -11,12 +11,11 @@ module UnitRecord
     protected
 
     def extract_associations(attributes = {})
-      attributes.inject({}) do |associations, (attr, value)|
+      attributes.each_with_object({}) do |(attr, value), associations|
         next associations unless self.class.reflections.keys.include? attr
         unless value.is_a?(self.class.reflections[attr].klass)
           associations[attr] = attributes.delete attr
         end
-        associations
       end
     end
 

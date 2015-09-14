@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mocha', '1.1.0'
 
   if s.respond_to? :specification_version
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 2
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0')

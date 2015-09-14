@@ -31,29 +31,18 @@ Lint/RescueException:
     - 'test/active_record/connection_adapters/unit_record_adapter_test.rb'
 
 # Offense count: 1
-Lint/UselessAssignment:
-  Exclude:
-    - 'unit-record.gemspec'
-
-# Offense count: 1
 Metrics/AbcSize:
   Max: 16
 
 # Offense count: 55
 # Configuration parameters: AllowURI, URISchemes.
 Metrics/LineLength:
-  Max: 154
+  Max: 120
 
 # Offense count: 2
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
   Max: 14
-
-# Offense count: 1
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'lib/active_record/connection_adapters/unit_record_adapter.rb'
 
 # Offense count: 17
 Style/Documentation:
@@ -68,8 +57,3 @@ Style/Documentation:
     - 'test/sample_spec.rb'
     - 'test/test_helper.rb'
     - 'test/unit_record/controller_test.rb'
-
-# Offense count: 1
-Style/EachWithObject:
-  Exclude:
-    - 'lib/unit_record/association_stubbing.rb'

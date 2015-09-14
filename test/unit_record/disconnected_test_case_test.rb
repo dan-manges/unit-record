@@ -14,6 +14,8 @@ functional_tests do
     rescue => exception
     end
     assert_not_nil exception
-    assert_equal 'Fixtures cannot be used with UnitRecord. ActiveRecord is disconnected; database access is unavailable in unit tests.', exception.message
+    expected_message = 'Fixtures cannot be used with UnitRecord. ' \
+      'ActiveRecord is disconnected; database access is unavailable in unit tests.'
+    assert_equal expected_message, exception.message
   end
 end
