@@ -1,9 +1,12 @@
 require 'rake'
 require 'rake/testtask'
 require "spec/rake/spectask"
+require 'rubocop/rake_task'
 
 desc "Default: run tests"
-task :default => %w[test]
+task :default => %w[rubocop test]
+
+RuboCop::RakeTask.new(:rubocop)
 
 Rake::TestTask.new("test") do |t|
   t.pattern = "test/**/*_test.rb"

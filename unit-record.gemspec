@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'dust', '0.1.6'
   s.add_development_dependency 'test-unit', '3.1.1'
   s.add_development_dependency 'rspec', '1.1.11'
+  s.add_development_dependency 'rubocop', '~> 0.34.1'
   s.add_development_dependency 'mocha', '1.1.0'
 
   if s.respond_to? :specification_version then
