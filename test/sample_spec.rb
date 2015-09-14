@@ -1,19 +1,18 @@
 require "rubygems"
-gem "rspec", "1.1.11"
-require "test/unit"
 require "spec"
 
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 
-if rails_version = ENV['RAILS_VERSION']
-  gem "rails", rails_version
+require "rails/all"
+module Rails
+  class << self
+    def root
+      @root ||= Pathname.new(File.dirname(__FILE__))
+    end
+  end
 end
-require "rails/version"
+
 puts "==== Testing with Rails #{Rails::VERSION::STRING} ===="
-require 'active_record'
-require 'active_record/fixtures'
-require "action_controller"
-require "action_controller/test_process"
 
 require "unit_record"
 

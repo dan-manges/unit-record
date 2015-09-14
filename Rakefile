@@ -1,5 +1,6 @@
 require 'rake'
 require 'rake/testtask'
+require "spec/rake/spectask"
 
 desc "Default: run tests"
 task :default => %w[test spec]
@@ -7,6 +8,10 @@ task :default => %w[test spec]
 Rake::TestTask.new("test") do |t|
   t.pattern = "test/**/*_test.rb"
   t.verbose = true
+end
+
+Spec::Rake::SpecTask.new(:spec) do |t|
+  t.spec_files = %w[test/sample_spec.rb]
 end
 
 begin
@@ -35,18 +40,6 @@ task :readme do
   file = "#{Dir.tmpdir}/readme.html"
   File.open(file, "w") { |f| f.write BlueCloth.new(File.read("README.markdown")).to_html }
   sh "open #{file}"
-end
-
-begin
-  gem "rspec"
-  require "spec/rake/spectask"
-  Spec::Rake::SpecTask.new(:spec) do |t|
-    t.spec_files = %w[test/sample_spec.rb]
-  end
-rescue LoadError
-  task :spec do
-    puts "== RSpec failed to load"
-  end
 end
 
 desc "pre-commit task"
