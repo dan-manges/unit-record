@@ -2,7 +2,7 @@ require 'rake'
 require 'rake/testtask'
 
 desc "Default: run tests"
-task :default => %w[test:multi_verbose spec]
+task :default => %w[test spec]
 
 Rake::TestTask.new("test") do |t|
   t.pattern = "test/**/*_test.rb"
@@ -20,28 +20,6 @@ begin
 rescue LoadError
 end
 
-require "date"
-
-gem_spec = Gem::Specification.new do |s|
-	s.name   = "unit_record"
-  s.summary = "UnitRecord enables unit testing without hitting the database."
-	s.version = "0.9.1"
-	s.author = "Dan Manges"
-	s.description = "UnitRecord enables unit testing without hitting the database."
-	s.email = "daniel.manges@gmail.com"
-  s.homepage = "http://unit-test-ar.rubyforge.org"
-  s.rubyforge_project = "unit-test-ar"
-
-  s.has_rdoc = false
-
-  s.autorequire = "unit_record"
-  s.files = FileList['{lib,test,vendor}/**/*.rb', 'CHANGELOG', 'LICENSE', 'README.markdown', 'Rakefile'].to_a
-end
-
-task :gem => %w[test:multi] do
-  Gem::Builder.new(gem_spec).build
-end
-
 namespace :gemspec do
   desc "generates unit-record.gemspec"
   task :generate do
@@ -57,26 +35,6 @@ task :readme do
   file = "#{Dir.tmpdir}/readme.html"
   File.open(file, "w") { |f| f.write BlueCloth.new(File.read("README.markdown")).to_html }
   sh "open #{file}"
-end
-
-RAILS_VERSIONS = %w[3.2.21]
-
-namespace :test do
-  desc "test with multiple versions of rails"
-  task :multi do
-    RAILS_VERSIONS.each do |rails_version|
-      puts "Testing with Rails #{rails_version}"
-      sh "RAILS_VERSION='#{rails_version}' rake test > /dev/null 2>&1"
-    end
-  end
-
-  task :multi_verbose do
-    (RAILS_VERSIONS - %w[]).each do |rails_version|
-      task = defined?(Rcov) ? "rcov" : "test"
-      puts "Testing with Rails #{rails_version}"
-      sh "RAILS_VERSION='#{rails_version}' rake #{task}"
-    end
-  end
 end
 
 begin

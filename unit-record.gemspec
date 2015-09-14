@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{UnitRecord enables unit testing without hitting the database.}
   s.add_development_dependency 'rake', '> 0'
-  s.add_development_dependency 'rails', '3.2.22'
   s.add_development_dependency 'dust', '0.1.6'
   s.add_development_dependency 'test-unit', '3.1.1'
   s.add_development_dependency 'mocha', '1.1.0'

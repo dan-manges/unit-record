@@ -3,5 +3,5 @@ pkg
 *.gem
 .treasure_map.rb
 .bundle
-Gemfile.lock
+Gemfile*.lock
 vendor/bundle
