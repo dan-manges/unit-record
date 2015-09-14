@@ -7,6 +7,8 @@ module ActiveRecord
   module ConnectionAdapters
     class UnitRecordAdapter < ::ActiveRecord::ConnectionAdapters::AbstractAdapter
       EXCEPTION_MESSAGE = 'ActiveRecord is disconnected; database access is unavailable in unit tests.'
+      ID = 'id'.freeze
+      STRATEGIES = [:noop, :raise].freeze
 
       def initialize(config = {})
         super
@@ -21,7 +23,7 @@ module ActiveRecord
 
       def create_table(table_name, options = {})
         table_definition = ActiveRecord::ConnectionAdapters::TableDefinition.new(self)
-        table_definition.primary_key(options[:primary_key] || 'id') unless options[:id] == false
+        table_definition.primary_key(options[:primary_key] || ID) unless options[:id] == false
         yield table_definition
         @cached_columns[table_name.to_s] =
           table_definition.columns.map do |c|
@@ -30,7 +32,7 @@ module ActiveRecord
       end
 
       def primary_key(*_args)
-        'id'
+        ID
       end
 
       def native_database_types
@@ -52,9 +54,10 @@ module ActiveRecord
       end
 
       def change_strategy(new_strategy, &_block)
-        unless [:noop, :raise].include?(new_strategy.to_sym)
+        unless STRATEGIES.include?(new_strategy.to_sym)
           fail ArgumentError, "#{new_strategy.inspect} is not a valid strategy - valid values are :noop and :raise"
         end
+
         begin
           old_strategy = @strategy
           @strategy = new_strategy.to_sym
