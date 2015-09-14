@@ -3,7 +3,7 @@ require 'rake/testtask'
 require "spec/rake/spectask"
 
 desc "Default: run tests"
-task :default => %w[test spec]
+task :default => %w[test]
 
 Rake::TestTask.new("test") do |t|
   t.pattern = "test/**/*_test.rb"
