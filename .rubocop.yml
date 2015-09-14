@@ -46,14 +46,4 @@ Metrics/MethodLength:
 
 # Offense count: 17
 Style/Documentation:
-  Exclude:
-    - 'lib/active_record/connection_adapters/unit_record_adapter.rb'
-    - 'lib/unit_record.rb'
-    - 'lib/unit_record/association_stubbing.rb'
-    - 'lib/unit_record/column_extension.rb'
-    - 'lib/unit_record/disconnected_active_record.rb'
-    - 'lib/unit_record/disconnected_fixtures.rb'
-    - 'lib/unit_record/disconnected_test_case.rb'
-    - 'test/sample_spec.rb'
-    - 'test/test_helper.rb'
-    - 'test/unit_record/controller_test.rb'
+  Enabled: false
