@@ -1,13 +1,5 @@
 module UnitRecord
   module AssociationStubbing
-    private
-
-    def initialize_with_association_stubbing(attributes = {})
-      associations = extract_associations attributes
-      initialize_without_association_stubbing attributes
-      stub_associations associations
-    end
-
     protected
 
     def extract_associations(attributes = {})
@@ -31,6 +23,14 @@ module UnitRecord
           alias_method_chain :initialize, :association_stubbing
         end
       end
+    end
+
+    private
+
+    def initialize_with_association_stubbing(attributes = {})
+      associations = extract_associations attributes
+      initialize_without_association_stubbing attributes
+      stub_associations associations
     end
   end
 end
