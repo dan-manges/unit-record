@@ -1,52 +1,52 @@
-require File.dirname(__FILE__) + "/../test_helper"
+require File.dirname(__FILE__) + '/../test_helper'
 
-functional_tests do  
-  test "find_by_sql gives disconnected exception message" do
+functional_tests do
+  test 'find_by_sql gives disconnected exception message' do
     exception = nil
     begin
-      Person.find_by_sql "SELECT * FROM people"
+      Person.find_by_sql 'SELECT * FROM people'
     rescue => exception
     end
     assert_not_nil exception
-    assert_equal "ActiveRecord is disconnected; database access is unavailable in unit tests.", exception.message
+    assert_equal 'ActiveRecord is disconnected; database access is unavailable in unit tests.', exception.message
   end
-  
-  test "connected? is true" do
+
+  test 'connected? is true' do
     assert_equal true, ActiveRecord::Base.connected?
   end
-  
-  test "disconnected? is true" do
+
+  test 'disconnected? is true' do
     assert_equal true, ActiveRecord::Base.disconnected?
   end
-  
-  test "inspect does not blow up" do
+
+  test 'inspect does not blow up' do
     assert_nothing_raised { Person.inspect }
   end
-  
-  test "table_exists?" do
+
+  test 'table_exists?' do
     assert_equal true, Person.table_exists?
     if ActiveRecord::Base.connection.respond_to?(:table_exists?)
-      assert_equal false, ActiveRecord::Base.connection.table_exists?("bogus_table")
+      assert_equal false, ActiveRecord::Base.connection.table_exists?('bogus_table')
     end
   end
-  
-  test "setting a has_one association" do
+
+  test 'setting a has_one association' do
     person = Person.new
     person.profile = Profile.new
   end
-  
-  test "boolean columns do type casting" do
+
+  test 'boolean columns do type casting' do
     pref = Preference.new
-    pref.show_help = "0"
+    pref.show_help = '0'
     assert_equal false, pref.send(:read_attribute, :show_help)
     assert_equal false, pref.show_help
     assert_equal false, pref.show_help?
-    pref.show_help = "1"
+    pref.show_help = '1'
     assert_equal true, pref.show_help
     assert_equal true, pref.show_help?
   end
-  
-  test "migrations are not verbose" do
+
+  test 'migrations are not verbose' do
     assert_equal false, ActiveRecord::Migration.verbose
   end
 end

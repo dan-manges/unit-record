@@ -1,43 +1,27 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
+class SampleApplication < Rails::Application
+end
+SampleApplication.routes.draw do
+  match '/sample/sample_action', to: 'sample#sample_action'
+end
+
+SampleApplication.routes.draw do
+  match '/sample/sample_action', to: 'sample#sample_action'
+end
 class SampleController < ActionController::Base
+  include SampleApplication.routes.url_helpers
   def sample_action
-    render :text => "OK"
+    render text: 'OK'
   end
 end
 
-ActionController::Routing::Routes.add_route "/sample/sample_action", :controller => "sample", :action => "sample_action"
+class ControllerTest < ActionController::TestCase
+  tests SampleController
 
-if defined?(ActionController::TestCase) # Rails 2
-
-  class ControllerTest < ActionController::TestCase
-    tests SampleController
-  
-    test "render" do
-      get :sample_action
-      assert_equal "OK", @response.body
-    end
-  
-    if defined?(ActionController::Caching::SqlCache) # SqlCache goes away in Rails 2.3.1
-      test "sql caching is enabled" do
-        assert_equal true, (SampleController < ActionController::Caching::SqlCache)
-      end
-    end
+  test 'render' do
+    @routes = SampleApplication.routes
+    get :sample_action
+    assert_equal 'OK', @response.body
   end
-
-else # Rails 1.x
-
-  class ControllerTest < Test::Unit::TestCase
-    def setup
-      @controller = SampleController.new
-      @request    = ActionController::TestRequest.new
-      @response   = ActionController::TestResponse.new
-    end
-
-    test "render" do
-      get :sample_action
-      assert_equal "OK", @response.body
-    end
-  end  
-
 end

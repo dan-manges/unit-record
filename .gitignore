@@ -2,3 +2,6 @@ doc
 pkg
 *.gem
 .treasure_map.rb
+.bundle
+Gemfile*.lock
+vendor/bundle

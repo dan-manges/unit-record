@@ -1,73 +1,71 @@
 unless defined?(TEST_HELPER_LOADED)
-TEST_HELPER_LOADED = true
-$:.unshift(File.dirname(__FILE__) + '/../lib')
-RAILS_ROOT = File.dirname(__FILE__)
+  TEST_HELPER_LOADED = true
+  $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 
-require 'rubygems'
-require 'test/unit'
+  require 'rubygems'
+  require 'rails/all'
 
-if rails_version = ENV['RAILS_VERSION']
-  gem "rails", rails_version
-end
-require "rails/version"
-puts "==== Testing with Rails #{Rails::VERSION::STRING} ===="
-require 'active_record'
-require 'active_record/fixtures'
-require "action_controller"
-if Rails::VERSION::MAJOR == 2
-  require "action_controller/test_case"
-end
-require "action_controller/test_process"
+  module Rails
+    class << self
+      def root
+        @root ||= Pathname.new(File.dirname(__FILE__))
+      end
+    end
+  end
 
-begin
-  gem "mocha"
-  require 'mocha'
-rescue LoadError, Gem::LoadError
-  raise "need mocha to test"
-end
-$LOAD_PATH << File.dirname(__FILE__) + "/../vendor/dust-0.1.6/lib"
-require 'dust'
-Test::Unit::TestCase.disallow_setup!
+  if Rails::VERSION::MAJOR > 3 && Rails::VERSION::MINOR > 0
+    if defined?(Bundler)
+      # If you precompile assets before deploying to production, use this line
+      Bundler.require(*Rails.groups(assets: %w(development test)))
+      # If you want your assets lazily compiled in production, use this line
+      # Bundler.require(:default, :assets, Rails.env)
+    end
+  end
 
-$LOAD_PATH << File.dirname(__FILE__) + "/../lib"
-require "unit_record"
+  require 'action_controller/test_case' if Rails::VERSION::MAJOR == 2
 
-if UnitRecord.rails_version >= "2.3"
-  require "active_support/test_case"
-  ActiveSupport::TestCase.class_eval { include ActiveRecord::TestFixtures }
-end
+  require 'dust'
+  Test::Unit::TestCase.disallow_setup!
 
-UnitRecord.base_rails_test_class.use_transactional_fixtures = true
+  $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
+  require 'unit_record'
 
-# Needed because of this line in setup_with_fixtures and teardown_with_fixtures:
-#   return unless defined?(ActiveRecord::Base) && !ActiveRecord::Base.configurations.blank?
-ActiveRecord::Base.configurations = {"irrelevant" => {:adapter => "stub"}}
+  if UnitRecord.rails_version >= '2.3'
+    require 'active_support/test_case'
+    ActiveSupport::TestCase.class_eval { include ActiveRecord::TestFixtures }
+  end
 
-class Preference < ActiveRecord::Base
-end
+  UnitRecord.base_rails_test_class.use_transactional_fixtures = true
 
-class Person < ActiveRecord::Base
-  has_many :pets
-  has_one :profile
-end
+  # Needed because of this line in setup_with_fixtures and teardown_with_fixtures:
+  #   return unless defined?(ActiveRecord::Base) && !ActiveRecord::Base.configurations.blank?
+  ActiveRecord::Base.configurations = { 'irrelevant' => { adapter: 'stub' } }
 
-class Profile < ActiveRecord::Base
-  belongs_to :person
-end
+  class Preference < ActiveRecord::Base
+  end
 
-class Pet < ActiveRecord::Base
-  belongs_to :person
-end
+  class Person < ActiveRecord::Base
+    has_many :pets
+    has_one :profile
+  end
 
-class Foo < ActiveRecord::Base
-  set_table_name :foofoo
-end
+  class Profile < ActiveRecord::Base
+    belongs_to :person
+  end
 
-class DoesNotExist < ActiveRecord::Base
-  set_table_name "table_does_not_exist"
-end
+  class Pet < ActiveRecord::Base
+    belongs_to :person
+  end
 
-ActiveRecord::Base.disconnect! :strategy => :raise, :stub_associations => true
-# make sure calling disconnect multiple times does not cause problems
-ActiveRecord::Base.disconnect! :strategy => :raise, :stub_associations => true
+  class Foo < ActiveRecord::Base
+    self.table_name = 'foofoo'
+  end
+
+  class DoesNotExist < ActiveRecord::Base
+    self.table_name = 'table_does_not_exist'
+  end
+
+  ActiveRecord::Base.disconnect! strategy: :raise, stub_associations: true
+  # make sure calling disconnect multiple times does not cause problems
+  ActiveRecord::Base.disconnect! strategy: :raise, stub_associations: true
 end
